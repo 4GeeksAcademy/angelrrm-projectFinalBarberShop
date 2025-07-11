@@ -1,19 +1,149 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import String, Boolean
 from sqlalchemy.orm import Mapped, mapped_column
+from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///barbershop.db'  # Example URI
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy()
 
 class User(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    email: Mapped[str] = mapped_column(String(120), unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(nullable=False)
-    is_active: Mapped[bool] = mapped_column(Boolean(), nullable=False)
+    __tablename__ = 'users'
 
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password_hash = db.Column(db.String(128), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
-    def serialize(self):
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+    
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+    
+    def to_dict(self):
         return {
-            "id": self.id,
-            "email": self.email,
-            # do not serialize the password, its a security breach
+            'id': self.id,
+            'username': self.username,
+            'email': self.email,
+            'is_admin': self.is_admin,
+        }
+    
+class Product(db.Model):
+    __tablename__ = 'products'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    price = db.Column(db.Numeric(10, 2), nullable=False)
+    stock = db.Column(db.Integer, default=0)
+    category = db.Column(db.String(50))
+    image_url = db.Column(db.String(255))
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price': float(self.price),
+            'stock': self.stock,
+            'category': self.category,
+            'image_url': self.image_url,
+            'is_active': self.is_active,
+            'created_at': self.created_at.isoformat()
+        }
+
+class Service(db.Model):
+    __tablename__ = 'services'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    price = db.Column(db.Numeric(10, 2), nullable=False)
+    duration = db.Column(db.Integer)
+    image_url = db.Column(db.String(255))
+    is_active = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'price': float(self.price),
+            'duration': self.duration,
+            'image_url': self.image_url,
+            'is_active': self.is_active,
+            'created_at': self.created_at.isoformat()
+        }
+    
+class Gallery(db.Model):
+    __tablename__ = 'gallery'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100))
+    description = db.Column(db.Text)
+    image_url = db.Column(db.String(255), nullable=False)
+    category = db.Column(db.String(50))
+    is_featured = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'image_url': self.image_url,
+            'category': self.category,
+            'is_featured': self.is_featured,
+            'created_at': self.created_at.isoformat()
+        }
+    
+class BarbershopInfo(db.Model):
+    __tablename__ = 'barbershop_info'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text)
+    address = db.Column(db.Text)
+    phone = db.Column(db.String(20))
+    email = db.Column(db.String(100))
+    google_maps_url = db.Column(db.Text)
+    boosky_url = db.Column(db.Text)
+    instagram_url = db.Column(db.String(255))
+    facebook_url = db.Column(db.String(255))
+    hours_monday = db.Column(db.String(50))
+    hours_tuesday = db.Column(db.String(50))
+    hours_wednesday = db.Column(db.String(50))
+    hours_thursday = db.Column(db.String(50))
+    hours_friday = db.Column(db.String(50))
+    hours_saturday = db.Column(db.String(50))
+    hours_sunday = db.Column(db.String(50))
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description,
+            'address': self.address,
+            'phone': self.phone,
+            'email': self.email,
+            'google_maps_url': self.google_maps_url,
+            'boosky_url': self.boosky_url,
+            'instagram_url': self.instagram_url,
+            'facebook_url': self.facebook_url,
+            'hours_monday': self.hours_monday,
+            'hours_tuesday': self.hours_tuesday,
+            'hours_wednesday': self.hours_wednesday,
+            'hours_thursday': self.hours_thursday,
+            'hours_friday': self.hours_friday,
+            'hours_saturday': self.hours_saturday,
+            'hours_sunday': self.hours_sunday,
         }
