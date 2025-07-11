@@ -33,11 +33,11 @@ export const Home = () => {
 	}, [])
 
 	return (
-		<div className="text-center mt-5">
-			<h1 className="display-4">Hello Rigo!!</h1>
-			<p className="lead">
-				<img src={rigoImageUrl} className="img-fluid rounded-circle mb-3" alt="Rigo Baby" />
-			</p>
+		<div className="container-fluid p-0 m-0">
+			<img src="https://img.freepik.com/premium-photo/man-barber-shop-getting-hair-beard-cut_640251-42312.jpg"
+				className="header-img"
+				alt="Rigo Baby"
+			/>
 			<div className="alert alert-info">
 				{store.message ? (
 					<span>{store.message}</span>
@@ -47,6 +47,98 @@ export const Home = () => {
 					</span>
 				)}
 			</div>
+
+			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">Login</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							<form>
+								<div className="mb-3">
+									<label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+									<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+									<div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+								</div>
+								<div className="mb-3">
+									<label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+									<input type="password" className="form-control" id="exampleInputPassword1" />
+								</div>
+								<div className="mb-3 form-check">
+									<input type="checkbox" className="form-check-input" id="exampleCheck1" />
+									<label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+								</div>
+								<button type="submit" className="btn btn-primary">Submit</button>
+							</form>
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+							<button type="button" className="btn btn-primary">Guardar cambios</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div className="modal fade" id="registroModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h1 className="modal-title fs-5" id="exampleModalLabel">Registro</h1>
+							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div className="modal-body">
+							<form className="row g-3">
+								<div className="col-md-6">
+									<label htmlFor="firstName" className="form-label">Nombre</label>
+									<input
+										type="text"
+										className="form-control"
+										id="firstName"
+										required
+									/>
+								</div>
+								<div className="col-md-6">
+									<label htmlFor="lastName" className="form-label">Apellido</label>
+									<input
+										type="text"
+										className="form-control"
+										id="lastName"
+										required
+									/>
+								</div>
+								<div className="col-md-12">
+									<label htmlFor="email" className="form-label">Email</label>
+									<input
+										type="email"
+										className="form-control"
+										id="email"
+										required
+									/>
+								</div>
+								<div className="col-md-12">
+									<label htmlFor="birthday" className="form-label">Cumpleaños</label>
+									<input
+										type="date"
+										className="form-control"
+										id="birthday"
+										required
+									/>
+								</div>
+								<div className="col-12">
+									<button className="btn btn-primary w-100" type="submit">Registrarse</button>
+								</div>
+							</form>
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 		</div>
 	);
 }; 
