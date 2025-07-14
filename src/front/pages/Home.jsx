@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import onlylogo from '../assets/img/onlylogo.png';
-
+import ServiceCard from "../components/ServiceCard.jsx";
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
@@ -46,7 +46,19 @@ export const Home = () => {
 					</button>
 				</div>
 			</header>
-
+			<div className="services-section">
+				<h2>Nuestros Servicios</h2>
+				<div className="services-grid">
+					{servicios.map((servicio, idx) => (
+						<ServiceCard
+							key={idx}
+							title={servicio.title}
+							description={servicio.description}
+							image={servicio.image}
+						/>
+					))}
+				</div>
+			</div>
 			<div className="alert alert-info">
 				{store.message ? (
 					<span>{store.message}</span>
