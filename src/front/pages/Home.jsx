@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import onlylogo from '../assets/img/onlylogo.png';
 
 export const Home = () => {
 
@@ -34,10 +34,19 @@ export const Home = () => {
 
 	return (
 		<div className="container-fluid p-0 m-0">
-			<img src="https://img.freepik.com/premium-photo/man-barber-shop-getting-hair-beard-cut_640251-42312.jpg"
-				className="header-img"
-				alt="Rigo Baby"
-			/>
+			<header className="hero-banner">
+				<div className="hero-overlay">
+					<h1 className="display-4">Bienvenido a Godfather Barbería</h1>
+					<p className="lead">Look premium, actitud Godfather.</p>
+					<img src={onlylogo} alt="Godfather Barbería Logo"
+						className="hero-logo"
+						style={{ width: "60%", height: "auto" }} />
+					<button type="button" className="btn btn-primary hero-btn">
+						¡Reserva tu cita!
+					</button>
+				</div>
+			</header>
+
 			<div className="alert alert-info">
 				{store.message ? (
 					<span>{store.message}</span>

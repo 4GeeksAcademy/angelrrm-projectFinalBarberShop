@@ -4,11 +4,20 @@ import logo from '../assets/img/logo.png';
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-light bg-none">
+		<nav className="navbar navbar-light bg-body-tertiary">
 			<div className="container">
 				<Link to="/">
-					<img src={logo} alt="Logo Godfather Barbería" style={{ width: "80px", height: "auto" }} />
-					<span className="navbar-brand">GodBarber</span>
+					<img
+						src={logo}
+						alt="Logo Godfather Barbería"
+						style={{
+							width: "200px",
+							height: "auto",
+							margin: 0,
+							padding: 0,
+							display: "block"
+						}}
+					/>
 				</Link>
 
 				<div className="navbar-nav" id="navbarNav">
@@ -31,12 +40,12 @@ export const Navbar = () => {
 				<div className="ml-auto">
 					<ul className="navbar-nav">
 						<li className="nav-item">
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+							<button type="button" class="btn btn-none" data-bs-toggle="modal" data-bs-target="#loginModal">
 								Login
 							</button>
 						</li>
 						<li className="nav-item">
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registroModal">
+							<button type="button" class="btn btn-none" data-bs-toggle="modal" data-bs-target="#registroModal">
 								Registro
 							</button>
 						</li>
