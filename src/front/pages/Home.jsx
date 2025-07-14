@@ -31,7 +31,24 @@ export const Home = () => {
 	useEffect(() => {
 		loadMessage()
 	}, [])
-
+const servicios = [
+	{
+    title: "Corte de Cabello",
+    description: "Corte personalizado según tu estilo, realizado por barberos expertos.",
+    image: "https://i.pinimg.com/1200x/87/e2/4f/87e24f4299ff167b7ec559c4428d954a.jpg"
+  },
+  {
+    title: "Corte de Barba",
+    description: "Modelado y perfilado profesional para tu barba, usando técnicas precisas y productos de alta calidad.",
+    image: "https://i.pinimg.com/1200x/91/d6/03/91d6037c183ccc9644cdd59a70857524.jpg"
+  },
+  {
+    title: "Corte de Barba",
+    description: "Modelado y perfilado profesional para tu barba, usando técnicas precisas y productos de alta calidad.",
+    image: "https://i.pinimg.com/1200x/91/d6/03/91d6037c183ccc9644cdd59a70857524.jpg"
+  },
+  
+];
 	return (
 		<div className="container-fluid p-0 m-0">
 			<header className="hero-banner">
@@ -46,6 +63,7 @@ export const Home = () => {
 					</button>
 				</div>
 			</header>
+
 			<div className="services-section">
 				<h2>Nuestros Servicios</h2>
 				<div className="services-grid">
@@ -59,6 +77,7 @@ export const Home = () => {
 					))}
 				</div>
 			</div>
+
 			<div className="alert alert-info">
 				{store.message ? (
 					<span>{store.message}</span>
