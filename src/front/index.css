@@ -1,18 +1,45 @@
-body{
-    background-color: #6b6b6b;    
+body {
+  background-color: #232323;
 }
 
 .navbar {
- background: transparent !important;
- padding-top: 0 !important;
- padding-bottom: 0 !important;
- margin: 0;
-}
-.navbar-nav {
-    flex-direction: row !important;
-    gap: 15px;
+  background: transparent !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  margin: 0;
 }
 
+.navbar-nav { 
+  flex-direction: row !important;
+  gap: 15px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.navbar-nav:hover {
+  color: #fff;
+}
+
+.nav-link {
+  color: #ffffff !important;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #dfb565 !important;
+}
+
+.login {
+  color: #dfb565;
+    font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+.login:hover {
+  color: #fff;
+}
 .hero-banner {
   position: relative;
   min-height: 70vh;
@@ -20,19 +47,19 @@ body{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('https://img.freepik.com/premium-photo/man-barber-shop-getting-hair-beard-cut_640251-42312.jpg');
+  background-image: url("https://img.freepik.com/premium-photo/man-barber-shop-getting-hair-beard-cut_640251-42312.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .hero-overlay {
-  background: rgba(35,35,35,0.5); 
+  background: rgba(35, 35, 35, 0.5);
   border-radius: 16px;
   padding: 40px 20px;
   text-align: center;
   color: #fff;
-  box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
   max-width: 600px;
   width: 100%;
   margin: 0 16px;
@@ -47,10 +74,10 @@ body{
   border-radius: 24px;
   font-size: 1.2rem;
   font-weight: 600;
-  background: #dfb565; 
+  background: #dfb565;
   color: #222;
   border: none;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
   transition: background 0.2s, color 0.2s;
 }
 .hero-btn:hover {
@@ -61,11 +88,11 @@ body{
 .services-section {
   padding: 48px 0 32px 0;
   text-align: center;
-  background: #232323; 
+  background: #232323;
 }
 
 .services-section h2 {
-  color: #dfb565; 
+  color: #dfb565;
   font-size: 2.2rem;
   margin-bottom: 32px;
   letter-spacing: 1px;
@@ -83,7 +110,7 @@ body{
 .service-card {
   background: #292929;
   border-radius: 18px;
-  box-shadow: 0 2px 14px rgba(0,0,0,0.14);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.14);
   padding: 28px 18px 22px 18px;
   width: 260px;
   min-height: 350px;
@@ -91,18 +118,19 @@ body{
   flex-direction: column;
   align-items: center;
   transition: transform 0.18s, box-shadow 0.18s;
-  border: 1.5px solid #dfb56522; 
+  border: 1.5px solid #dfb56522;
   position: relative;
 }
 
 .service-card:hover {
   transform: translateY(-8px) scale(1.04);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.22);
-  border-color: #dfb56588;}
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+  border-color: #dfb56588;
+}
 
 .service-card-img-container {
-  width: 112px;
-  height: 112px;
+  width: 152px;
+  height: 152px;
   overflow: hidden;
   border-radius: 50%;
   margin-bottom: 20px;

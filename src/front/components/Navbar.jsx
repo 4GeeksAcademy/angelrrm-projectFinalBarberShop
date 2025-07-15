@@ -32,7 +32,10 @@ export const Navbar = () => {
 							<a className="nav-link" href="#">Servicios</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
+							<a className="nav-link" href="#">Contacto</a>
+						</li>
+						<li className="nav-item">
+							<a className="nav-link" href="#">Sobre Nosotros</a>
 						</li>
 					</ul>
 				</div>
@@ -40,15 +43,11 @@ export const Navbar = () => {
 				<div className="ml-auto">
 					<ul className="navbar-nav">
 						<li className="nav-item">
-							<button type="button" class="btn btn-none" data-bs-toggle="modal" data-bs-target="#loginModal">
+							<button type="button" class="btn btn-none login" data-bs-toggle="modal" data-bs-target="#loginModal">
 								Login
 							</button>
 						</li>
-						<li className="nav-item">
-							<button type="button" class="btn btn-none" data-bs-toggle="modal" data-bs-target="#registroModal">
-								Registro
-							</button>
-						</li>
+
 					</ul>
 				</div>
 			</div>

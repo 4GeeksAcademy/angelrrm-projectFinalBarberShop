@@ -42,11 +42,11 @@ const servicios = [
     description: "Modelado y perfilado profesional para tu barba, usando técnicas precisas y productos de alta calidad.",
     image: "https://i.pinimg.com/1200x/91/d6/03/91d6037c183ccc9644cdd59a70857524.jpg"
   },
-  {
-    title: "Corte de Barba",
-    description: "Modelado y perfilado profesional para tu barba, usando técnicas precisas y productos de alta calidad.",
-    image: "https://i.pinimg.com/1200x/91/d6/03/91d6037c183ccc9644cdd59a70857524.jpg"
-  },
+{
+  title: "Corte para Niños",
+  description: "Un ambiente divertido y relajado donde los más pequeños disfrutan de un corte diseñado especialmente para ellos.",
+  image: "https://i.pinimg.com/1200x/ee/43/88/ee4388d7c977c41b02a4cacb5f8638a2.jpg"
+},
   
 ];
 	return (
@@ -78,16 +78,6 @@ const servicios = [
 				</div>
 			</div>
 
-			<div className="alert alert-info">
-				{store.message ? (
-					<span>{store.message}</span>
-				) : (
-					<span className="text-danger">
-						Loading message from the backend (make sure your python 🐍 backend is running)...
-					</span>
-				)}
-			</div>
-
 			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog">
 					<div className="modal-content">
@@ -97,25 +87,25 @@ const servicios = [
 						</div>
 						<div className="modal-body">
 							<form>
-								<div className="mb-3">
-									<label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+								<div className="mb-3 email">
+									<label htmlFor="exampleInputEmail1" className="form-label">Email</label>
 									<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-									<div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+									<div id="emailHelp" className="form-text">Nunca compartiremos tu correo electrónico con nadie más.</div>
 								</div>
-								<div className="mb-3">
-									<label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+								<div className="mb-3 password">
+									<label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
 									<input type="password" className="form-control" id="exampleInputPassword1" />
 								</div>
 								<div className="mb-3 form-check">
 									<input type="checkbox" className="form-check-input" id="exampleCheck1" />
-									<label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+									<label className="form-check-label" htmlFor="exampleCheck1">Recuerdame</label>
 								</div>
-								<button type="submit" className="btn btn-primary">Submit</button>
+								<button type="submit" className="btn btn-none submit">Submit</button>
 							</form>
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-							<button type="button" className="btn btn-primary">Guardar cambios</button>
+							<button type="button" className="btn btn-none cancelar" data-bs-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-none register" data-bs-toggle="modal" data-bs-target="#registroModal">Registrarse</button>
 						</div>
 					</div>
 				</div>
