@@ -20,6 +20,7 @@ export const Navbar = () => {
 					/>
 				</Link>
 
+
 				<div className="navbar-nav" id="navbarNav">
 					<ul className="navbar-nav" style={{ flexDirection: "row", gap: "15px" }}>
 						<li className="nav-item active">
@@ -40,6 +41,12 @@ export const Navbar = () => {
 					</ul>
 				</div>
 
+
+  <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGodfather" aria-controls="navbarGodfather" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+
+  
 				<div className="ml-auto">
 					<ul className="navbar-nav">
 						<li className="nav-item">
