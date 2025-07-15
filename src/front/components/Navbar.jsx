@@ -27,10 +27,10 @@ export const Navbar = () => {
 							<a className="nav-link" href="#">Reserva tu Cita <span className="sr-only">(current)</span></a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">Productos</a>
+							<a className="nav-link" href="#service-scroll">Servicios</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#">Servicios</a>
+							<a className="nav-link" href="#">Productos</a>
 						</li>
 						<li className="nav-item">
 							<a className="nav-link" href="#">Contacto</a>
@@ -42,11 +42,11 @@ export const Navbar = () => {
 				</div>
 
 
-  <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGodfather" aria-controls="navbarGodfather" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
+				<button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGodfather" aria-controls="navbarGodfather" aria-expanded="false" aria-label="Toggle navigation">
+					<span className="navbar-toggler-icon"></span>
+				</button>
 
-  
+
 				<div className="ml-auto">
 					<ul className="navbar-nav">
 						<li className="nav-item">

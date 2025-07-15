@@ -94,11 +94,11 @@ body {
 
 /* Modal styles */
 .modal-content {
-  background: #222; /* Fondo oscuro */
+  background: #222; 
   color: #fff;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.55);
-  border: 1.5px solid #dfb56533; /* Borde dorado suave */
+  border: 1.5px solid #dfb56533; 
 }
 
 .modal-header {

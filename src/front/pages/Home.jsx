@@ -167,13 +167,18 @@ export const Home = () => {
 									/>
 								</div>
 								<div className="col-md-12">
-									<label htmlFor="birthday" className="form-label">Cumpleaños</label>
+									<label htmlFor="password" className="form-label">Contraseña</label>
 									<input
-										type="date"
+										type="password"
 										className="form-control"
-										id="birthday"
+										id="password"
 										required
+										pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
+										title="Debe tener mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número"
 									/>
+									<div className="form-text">
+										Debe tener mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número.
+									</div>
 								</div>
 								<div className="col-12">
 									<button className="btn btn-none w-100 register" type="submit">Registrarse</button>
