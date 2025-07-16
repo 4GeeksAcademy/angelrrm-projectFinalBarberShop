@@ -3,6 +3,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import onlylogo from '../assets/img/onlylogo.png';
 import ServiceCard from "../components/ServiceCard.jsx";
 import ProductCard from "../components/ProductCard.jsx";
+import CenterModeCarousel from "../components/CarruselCenterMode.jsx";
 
 export const Home = () => {
 
@@ -84,12 +85,12 @@ export const Home = () => {
 			description: "Breve descripción...",
 			image: "URL o ruta de la imagen"
 		},
-				{
+		{
 			title: "Nombre del servicio",
 			description: "Breve descripción...",
 			image: "URL o ruta de la imagen"
 		},
-				{
+		{
 			title: "Nombre del servicio",
 			description: "Breve descripción...",
 			image: "URL o ruta de la imagen"
@@ -113,20 +114,7 @@ export const Home = () => {
 			</header>
 
 
-			<div className="services-section">
-				<h2>Nuestros Servicios</h2>
-				<div className="services-grid">
-					{servicios.map((servicio, idx) => (
-						<div className="service-card" key={idx}>
-							<div className="service-card-img-container">
-								<img src={servicio.image} alt={servicio.title} className="service-card-img" />
-							</div>
-							<h3 className="service-card-title">{servicio.title}</h3>
-							<p className="service-card-description">{servicio.description}</p>
-						</div>
-					))}
-				</div>
-			</div>
+			<CenterModeCarousel servicios={servicios} />
 
 
 			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
