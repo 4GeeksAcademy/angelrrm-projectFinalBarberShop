@@ -1,6 +1,9 @@
 body {
   background-color: #232323;
 }
+body, html {
+  overflow-x: hidden;
+}
 
 /* Navbar styles */
 
@@ -237,16 +240,22 @@ input[type="checkbox"], .form-check-input {
   gap: 32px;
   justify-content: center;
   align-items: stretch;
+  width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .service-card {
   background: #292929;
   border-radius: 18px;
   box-shadow: 0 2px 14px rgba(0, 0, 0, 0.14);
+  margin-top: 20px;
   padding: 28px 18px 22px 18px;
   width: 360px;
   min-height: 450px;
   display: flex;
+  flex: 1 1 320px;
+  max-width: 100%;
   flex-direction: column;
   align-items: center;
   transition: transform 0.18s, box-shadow 0.18s;
@@ -256,7 +265,7 @@ input[type="checkbox"], .form-check-input {
 
 .service-card:hover {
   transform: translateY(-8px) scale(1.04);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 8px 30px #dfb56522, 0 1.5px 8px #dfb56544;
   border-color: #dfb56588;
 }
 
@@ -297,70 +306,11 @@ input[type="checkbox"], .form-check-input {
   text-align: center;
 }
 
-/*Scrollbar styles */
-.scroll-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  position: relative;
-  margin: 0 auto;
-  max-width: 100%;
-}
-
-.scroll-container {
-  display: flex;
+.service-card {
+  min-width: 340px;
+  max-width: 360px;
   flex: 0 0 auto;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.scroll-container>.contact-card {
-  min-width: 400px;
-  max-width: 400px;
-  flex: 0 0 auto;
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none; /* Oculta la barra de desplazamiento */
-}
-
-.scroll-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: #232323e6;             
-  color: #dfb565;                    
-  border: 2px solid #dfb565bb;         
-  font-size: 2.5rem;
-  margin: 40px;
-  padding: 0rem 1rem;
-  cursor: pointer;
-  border-radius: 50%;
-  box-shadow: 0 4px 18px #0009, 0 1px 6px #dfb56533;
-  transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.scroll-btn:hover {
-  background: #dfb565;
-  color: #232323;
-  border: 2.2px solid #fff3d4;
-  box-shadow: 0 6px 24px #dfb56555, 0 2px 12px #0007;
-  outline: none;
-}
-
-.scroll-btn.left {
-  left: -10px;
-}
-
-.scroll-btn.right {
-  right: -10px;
-}
+  }
 
 /* Responsive para mobile */
 
@@ -404,5 +354,12 @@ input[type="checkbox"], .form-check-input {
     margin: 16px;
     font-size: 1.4rem;
     padding: 0.3rem 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .service-card {
+    min-width: 90vw;
+    max-width: 96vw;
   }
 }

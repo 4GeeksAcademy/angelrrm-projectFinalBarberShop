@@ -34,7 +34,7 @@ class User(db.Model):
             'is_admin': self.is_admin,
         }
     
-class Product(db.Model):
+class Products(db.Model):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)

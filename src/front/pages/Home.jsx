@@ -64,23 +64,38 @@ export const Home = () => {
 			description: "Breve descripción...",
 			image: "URL o ruta de la imagen"
 		},
+		{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
+		},
+		{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
+		},
+		{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
+		},
+		{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
+		},
 				{
 			title: "Nombre del servicio",
 			description: "Breve descripción...",
 			image: "URL o ruta de la imagen"
 		},
-
+				{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
+		},
 	];
 
-	const scrollLeft = (id) => {
-		const el = document.getElementById(id);
-		if (el) el.scrollLeft -= 300;
-	};
-
-	const scrollRight = (id) => {
-		const el = document.getElementById(id);
-		if (el) el.scrollLeft += 300;
-	};
 
 	return (
 		<div className="container-fluid p-0 m-0">
@@ -98,25 +113,20 @@ export const Home = () => {
 			</header>
 
 
-			<div className="scroll-wrapper position-relative">
-				<button className="scroll-btn left" onClick={() => scrollLeft('service-scroll')}>‹</button>
-				<div className="scroll-container" id="service-scroll">
-					<div className="services-section">
-						<h2>Nuestros Servicios</h2>
-						<div className="services-grid">
-							{servicios.map((servicio, idx) => (
-								<ServiceCard
-									key={idx}
-									title={servicio.title}
-									description={servicio.description}
-									image={servicio.image}
-								/>
-							))}
+			<div className="services-section">
+				<h2>Nuestros Servicios</h2>
+				<div className="services-grid">
+					{servicios.map((servicio, idx) => (
+						<div className="service-card" key={idx}>
+							<div className="service-card-img-container">
+								<img src={servicio.image} alt={servicio.title} className="service-card-img" />
+							</div>
+							<h3 className="service-card-title">{servicio.title}</h3>
+							<p className="service-card-description">{servicio.description}</p>
 						</div>
-					</div>
+					))}
 				</div>
-				<button className="scroll-btn right" onClick={() => scrollRight('service-scroll')}>›</button>
-			</div >
+			</div>
 
 
 			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
