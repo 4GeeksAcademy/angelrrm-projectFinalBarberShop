@@ -2,6 +2,8 @@ import React, { useEffect } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import onlylogo from '../assets/img/onlylogo.png';
 import ServiceCard from "../components/ServiceCard.jsx";
+import ProductCard from "../components/ProductCard.jsx";
+
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
@@ -46,6 +48,26 @@ export const Home = () => {
 			title: "Corte para Niños",
 			description: "Un ambiente divertido y relajado donde los más pequeños disfrutan de un corte diseñado especialmente para ellos.",
 			image: "https://i.pinimg.com/1200x/ee/43/88/ee4388d7c977c41b02a4cacb5f8638a2.jpg"
+		},
+		{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
+		},
+		{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
+		},
+		{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
+		},
+				{
+			title: "Nombre del servicio",
+			description: "Breve descripción...",
+			image: "URL o ruta de la imagen"
 		},
 
 	];

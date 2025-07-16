@@ -1,0 +1,107 @@
+.products-page {
+  background: #232323;
+  min-height: 100vh;
+  color: #fff;
+  padding: 40px 0 64px 0;
+}
+
+.products-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.products-header h1 {
+  color: #dfb565;
+  font-size: 2.3rem;
+  font-weight: 800;
+}
+.products-header p {
+  color: #eee;
+  font-size: 1.17rem;
+  margin-top: 12px;
+}
+
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+
+.product-card {
+  background: #292929;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #0007;
+  padding: 24px 18px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1.5px solid #dfb56544;
+  transition: transform 0.16s, box-shadow 0.16s, border 0.16s;
+  margin: 8px;
+}
+.product-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 8px 32px #dfb56533;
+  border: 1.5px solid #dfb565;
+}
+.product-img {
+  width: 170px;
+  height: 170px;
+  border: 2px solid #dfb565;
+  border-radius: 750px;
+  object-fit: fill;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 8px #0003;
+}
+.product-brand {
+  color: #dfb565;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  text-align: center;
+}
+.product-type {
+  color: #fff;
+  font-size: 1.02rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.product-description {
+  color: #dedede;
+  font-size: 0.98rem;
+  text-align: center;
+}
+
+.brand-filter-btn {
+  background: #292929;
+  color: #dfb565;
+  border: 1.5px solid #dfb56555;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 1.02rem;
+  cursor: pointer;
+  transition: background 0.16s, color 0.16s, border 0.16s;
+}
+.brand-filter-btn.selected,
+.brand-filter-btn:hover {
+  background: #dfb565;
+  color: #232323;
+  border-color: #dfb565;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .products-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .product-card {
+    width: 90vw;
+    min-width: 0;
+    max-width: 350px;
+  }
+}

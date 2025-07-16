@@ -334,9 +334,9 @@ input[type="checkbox"], .form-check-input {
   background: #232323e6;             
   color: #dfb565;                    
   border: 2px solid #dfb565bb;         
-  font-size: 2.1rem;
+  font-size: 2.5rem;
   margin: 40px;
-  padding: 0.45rem 1.1rem;
+  padding: 0rem 1rem;
   cursor: pointer;
   border-radius: 50%;
   box-shadow: 0 4px 18px #0009, 0 1px 6px #dfb56533;
