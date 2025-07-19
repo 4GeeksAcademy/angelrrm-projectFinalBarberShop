@@ -5,6 +5,7 @@ import ServiceCard from "../components/ServiceCard.jsx";
 import ProductCard from "../components/ProductCard.jsx";
 import CenterModeCarousel from "../components/CarruselCenterMode.jsx";
 
+
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
@@ -38,7 +39,7 @@ export const Home = () => {
 		{
 			title: "Corte de Cabello",
 			description: "Corte personalizado según tu estilo, realizado por barberos expertos.",
-			image: "https://i.pinimg.com/1200x/87/e2/4f/87e24f4299ff167b7ec559c4428d954a.jpg"
+			image: "https://i.pinimg.com/736x/02/82/d0/0282d032df8a7e776f886c075da596ad.jpg"
 		},
 		{
 			title: "Corte de Barba",
@@ -51,50 +52,26 @@ export const Home = () => {
 			image: "https://i.pinimg.com/1200x/ee/43/88/ee4388d7c977c41b02a4cacb5f8638a2.jpg"
 		},
 		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
+			title: "Afeitado Degradado",
+			description: "Logra un acabado impecable y definido con nuestro afeitado degradado, perfecto para un look sofisticado y moderno.",
+			image: "https://i.pinimg.com/1200x/87/e2/4f/87e24f4299ff167b7ec559c4428d954a.jpg"
 		},
 		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
+			title: "Decoloración",
+			description: "Transforma tu cabello con una decoloración profesional que cuida tu melena mientras logra el tono deseado.",
+			image: "https://i.pinimg.com/736x/05/72/6c/05726c747639c4f2c98ebe581fe4fe30.jpg"
 		},
 		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
+			title: "Barba",
+			description: "Tratamientos especializados para barbas: desde modelado hasta hidratación, para un aspecto pulido y saludable.",
+			image: "https://i.pinimg.com/1200x/24/e5/e2/24e5e2310537f980e9a3dc8acfafa0c7.jpg"
 		},
 		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
-		},
-		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
-		},
-		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
-		},
-		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
-		},
-		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
-		},
-		{
-			title: "Nombre del servicio",
-			description: "Breve descripción...",
-			image: "URL o ruta de la imagen"
-		},
+			title: "Corte de Cabello con Diseño",
+			description: "Cortes de cabello con diseños únicos y personalizados, realizados por nuestros barberos expertos.",
+			image: "https://i.pinimg.com/736x/3b/9a/a6/3b9aa688d9baf5cc5121337608649b86.jpg"
+		}
+
 	];
 
 
@@ -113,9 +90,55 @@ export const Home = () => {
 				</div>
 			</header>
 
+			<div className="container my-5 services-section">
+				<CenterModeCarousel servicios={servicios} />
+			</div>
 
-			<CenterModeCarousel servicios={servicios} />
+			<div className="container contacto-section my-5">
+				<h2 className="mb-4 text-center">Contacto</h2>
+				<div className="row align-items-center">
+					<div className="col-md-6 mb-4 mb-md-0">
+						<h5 className="mb-2">Dirección</h5>
+						<p>
+							c/ princesa 98, intercambiador Moncloa<br />
+							planta -2 local BARBERIA, Madrid
+						</p>
 
+						<h5 className="mb-2">Teléfono</h5>
+						<p>
+							<a href="tel:+34688455701" className="text-decoration-none">+34 688 455 701</a>
+						</p>
+
+						<h5 className="mb-2">Horario</h5>
+						<p>
+							Lunes a Viernes: 10:00AM – 19:30PM<br />
+							Sábado: 09:00AM – 14:00PM
+						</p>
+
+						<h5 className="mb-2">Síguenos</h5>
+						<div className="d-flex gap-3">
+							<a href="https://www.instagram.com/barberiagodfather" target="_blank" rel="noopener noreferrer">
+								<i className="bi bi-instagram" style={{ fontSize: "2rem" }}></i>
+							</a>
+							<a href="https://wa.me/34688455701" target="_blank" rel="noopener noreferrer">
+								<i className="bi bi-whatsapp" style={{ fontSize: "2rem" }}></i>
+							</a>
+						</div>
+					</div>
+					<div className="col-md-6">
+						<iframe
+							title="Ubicación Barbería GodFather"
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.323273312608!2d-3.7223456846074767!3d40.434487979362565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4229a63215d623%3A0xebb003bf7b7dcea9!2sBarberia%20GodFather!5e0!3m2!1ses!2ses!4v1721439308567!5m2!1ses!2ses"
+							width="100%"
+							height="250"
+							style={{ border: 0, borderRadius: "12px" }}
+							allowFullScreen=""
+							loading="lazy"
+							referrerPolicy="no-referrer-when-downgrade"
+						></iframe>
+					</div>
+				</div>
+			</div>
 
 			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog">

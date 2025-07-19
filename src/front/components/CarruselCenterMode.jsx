@@ -20,11 +20,9 @@ export default function CenterModeCarousel({ servicios }) {
         <div className="center-carousel-wrapper">
             <button className="carousel-arrow left" onClick={goLeft}>‹</button>
             <div className="center-carousel-track">
-                <div className="carousel-card prev2">{<ServiceCard {...servicios[prev2]} />}</div>
                 <div className="carousel-card prev">{<ServiceCard {...servicios[prev]} />}</div>
                 <div className="carousel-card center">{<ServiceCard {...servicios[center]} />}</div>
                 <div className="carousel-card next">{<ServiceCard {...servicios[next]} />}</div>
-                <div className="carousel-card next2">{<ServiceCard {...servicios[next2]} />}</div>
             </div>
             <button className="carousel-arrow right" onClick={goRight}>›</button>
         </div>

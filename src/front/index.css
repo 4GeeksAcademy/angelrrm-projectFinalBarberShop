@@ -393,6 +393,63 @@ input[type="checkbox"],
   color: #232323;
   border: 2.2px solid #fff3d4;
 }
+
+
+/* Contact  styles */
+.contacto-section {
+    background: linear-gradient(135deg, #19181b 70%, #272626 100%);
+    color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(30, 30, 40, 0.25);
+    padding: 40px 40px;
+    margin-top: 50px;
+}
+
+.contacto-section h2 {
+    font-family: 'Oswald', 'Montserrat', 'Arial', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    color: #e9c46a;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 8px #0e0d10b3;
+}
+
+.contacto-section h5 {
+    color: #e9c46a;
+    font-weight: 600;
+    margin-top: 18px;
+}
+
+.contacto-section a {
+    color: #fff;
+    transition: color 0.3s;
+}
+.contacto-section a:hover {
+    color: #e9c46a;
+    text-decoration: underline;
+}
+
+.contacto-section .bi {
+    transition: transform 0.2s, color 0.3s;
+    color: #e9c46a;
+}
+.contacto-section .bi:hover {
+    transform: scale(1.15) rotate(-6deg);
+    color: #fff;
+}
+
+.contacto-section iframe {
+    border: 2px solid #e9c46a;
+    box-shadow: 0 2px 16px #0006;
+    border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+    .contacto-section {
+        padding: 24px 8px;
+    }
+}
+
 /* Responsive para mobile */
 
 @media (max-width: 991px) {
