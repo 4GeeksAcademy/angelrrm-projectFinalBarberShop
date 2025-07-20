@@ -91,55 +91,59 @@ export const Home = () => {
 			</header>
 
 			<div className="container my-5 services-section">
-				<CenterModeCarousel servicios={servicios} />
+				<h2 className="mb-4 text-center">Nuestros Servicios</h2>
+				<CenterModeCarousel id="service" servicios={servicios} />
 			</div>
 
-			<div className="container contacto-section my-5">
-				<h2 className="mb-4 text-center">Contacto</h2>
-				<div className="row align-items-center">
-					<div className="col-md-6 mb-4 mb-md-0">
-						<h5 className="mb-2">Dirección</h5>
-						<p>
-							c/ princesa 98, intercambiador Moncloa<br />
-							planta -2 local BARBERIA, Madrid
-						</p>
+			<div className="contacto-section-wrapper">
+				<div className="container contacto-section my-5">
+					<h2 className="mb-4 text-center">Contacto</h2>
+					<div className="row align-items-center">
+						<div className="col-md-6 mb-4 mb-md-0">
+							<h5 className="mb-2">Dirección</h5>
+							<p>
+								c/ princesa 98, intercambiador Moncloa<br />
+								planta -2 local BARBERIA, Madrid
+							</p>
 
-						<h5 className="mb-2">Teléfono</h5>
-						<p>
-							<a href="tel:+34688455701" className="text-decoration-none">+34 688 455 701</a>
-						</p>
+							<h5 className="mb-2">Teléfono</h5>
+							<p>
+								<a href="tel:+34688455701" className="text-decoration-none">+34 688 455 701</a>
+							</p>
 
-						<h5 className="mb-2">Horario</h5>
-						<p>
-							Lunes a Viernes: 10:00AM – 19:30PM<br />
-							Sábado: 09:00AM – 14:00PM
-						</p>
+							<h5 className="mb-2">Horario</h5>
+							<p>
+								Lunes a Viernes: 10:00AM – 19:30PM<br />
+								Sábado: 09:00AM – 14:00PM
+							</p>
 
-						<h5 className="mb-2">Síguenos</h5>
-						<div className="d-flex gap-3">
-							<a href="https://www.instagram.com/barberiagodfather" target="_blank" rel="noopener noreferrer">
-								<i className="bi bi-instagram" style={{ fontSize: "2rem" }}></i>
-							</a>
-							<a href="https://wa.me/34688455701" target="_blank" rel="noopener noreferrer">
-								<i className="bi bi-whatsapp" style={{ fontSize: "2rem" }}></i>
-							</a>
+							<h5 className="mb-2">Síguenos</h5>
+							<div className="d-flex gap-3">
+								<a href="https://www.instagram.com/barberiagodfather" target="_blank" rel="noopener noreferrer">
+									<i className="bi bi-instagram" style={{ fontSize: "2rem" }}></i>
+								</a>
+								<a href="https://wa.me/34688455701" target="_blank" rel="noopener noreferrer">
+									<i className="bi bi-whatsapp" style={{ fontSize: "2rem" }}></i>
+								</a>
+							</div>
 						</div>
-					</div>
-					<div className="col-md-6">
-						<iframe
-							title="Ubicación Barbería GodFather"
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.323273312608!2d-3.7223456846074767!3d40.434487979362565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4229a63215d623%3A0xebb003bf7b7dcea9!2sBarberia%20GodFather!5e0!3m2!1ses!2ses!4v1721439308567!5m2!1ses!2ses"
-							width="100%"
-							height="250"
-							style={{ border: 0, borderRadius: "12px" }}
-							allowFullScreen=""
-							loading="lazy"
-							referrerPolicy="no-referrer-when-downgrade"
-						></iframe>
+						<div className="col-md-6">
+							<iframe
+								title="Ubicación Barbería GodFather"
+								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.323273312608!2d-3.7223456846074767!3d40.434487979362565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4229a63215d623%3A0xebb003bf7b7dcea9!2sBarberia%20GodFather!5e0!3m2!1ses!2ses!4v1721439308567!5m2!1ses!2ses"
+								width="100%"
+								height="250"
+								style={{ border: 0, borderRadius: "12px" }}
+								allowFullScreen=""
+								loading="lazy"
+								referrerPolicy="no-referrer-when-downgrade"
+							></iframe>
+						</div>
 					</div>
 				</div>
 			</div>
 
+			
 			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog">
 					<div className="modal-content">

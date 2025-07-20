@@ -396,13 +396,26 @@ input[type="checkbox"],
 
 
 /* Contact  styles */
-.contacto-section {
+
+.contacto-section-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     background: linear-gradient(135deg, #19181b 70%, #272626 100%);
-    color: #fff;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+}
+.contacto-section {
     border-radius: 20px;
     box-shadow: 0 8px 32px 0 rgba(30, 30, 40, 0.25);
+    background: none;
+    color: #fff;
     padding: 40px 40px;
-    margin-top: 50px;
+    margin: 0 auto;
 }
 
 .contacto-section h2 {
