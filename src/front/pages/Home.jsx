@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import onlylogo from '../assets/img/onlylogo.png';
 import ServiceCard from "../components/ServiceCard.jsx";
@@ -10,31 +10,62 @@ export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
 
-	const loadMessage = async () => {
-		try {
-			const backendUrl = import.meta.env.VITE_BACKEND_URL
+	const [inforegistro, setInforegistro] = useState({
+		name: "",
+		email: "",
+		password: ""
+	});
 
-			if (!backendUrl) throw new Error("VITE_BACKEND_URL is not defined in .env file")
+	const [loginData, setLoginData] = useState({
+		email: "",
+		password: ""
+	});
 
-			const response = await fetch(backendUrl + "/api/hello")
-			const data = await response.json()
-
-			if (response.ok) dispatch({ type: "set_hello", payload: data.message })
-
-			return data
-
-		} catch (error) {
-			if (error.message) throw new Error(
-				`Could not fetch the message from the backend.
-				Please check if the backend is running and the backend port is public.`
-			);
+	const handleregister = async (e) => {
+		e.preventDefault(); 	// Aquí puedes hacer la llamada a tu API para registrar al usuario
+		const response = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/signup", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(inforegistro)
 		}
-
+		);
+		const data = await response.json();
+		if (response.ok) {
+			alert("Usuario registrado correctamente");
+			setInforegistro({
+				name: "",
+				email: "",
+				password: ""
+			});
+			document.querySelector("#registroModal .btn-close").click();
+		} else {
+			alert("Error al registrar el usuario: " + data.error);
+		}
 	}
 
-	useEffect(() => {
-		loadMessage()
-	}, [])
+	const handleLogin = async (e) => {
+		e.preventDefault();
+		const response = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/login", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(loginData)
+		});
+		const data = await response.json();
+		if (response.ok) {
+			// Guarda el token en sessionStorage/localStorage, como prefieras
+			sessionStorage.setItem("token", data.token);
+			alert("Bienvenido " + data.name);
+			setLoginData({ email: "", password: "" });
+			document.querySelector("#loginModal .btn-close").click();
+			// Aquí puedes redirigir o actualizar estado global, si quieres
+		} else {
+			alert("Error al iniciar sesión: " + (data.error || data.msg));
+		}
+	};
 	const servicios = [
 		{
 			title: "Corte de Cabello",
@@ -143,7 +174,7 @@ export const Home = () => {
 				</div>
 			</div>
 
-			
+
 			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog">
 					<div className="modal-content">
@@ -152,15 +183,28 @@ export const Home = () => {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							<form>
+							<form onSubmit={handleLogin}>
 								<div className="mb-3 email">
 									<label htmlFor="exampleInputEmail1" className="form-label">Email</label>
-									<input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
+									<input
+										type="email"
+										className="form-control"
+										id="exampleInputEmail1"
+										aria-describedby="emailHelp"
+										value={loginData.email}
+										onChange={e => setLoginData({ ...loginData, email: e.target.value })}
+									/>
 									<div id="emailHelp" className="form-text">Nunca compartiremos tu correo electrónico con nadie más.</div>
 								</div>
 								<div className="mb-3 password">
 									<label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
-									<input type="password" className="form-control" id="exampleInputPassword1" />
+									<input
+										type="password"
+										className="form-control"
+										id="exampleInputPassword1"
+										value={loginData.password}
+										onChange={e => setLoginData({ ...loginData, password: e.target.value })}
+									/>
 								</div>
 								<div className="mb-3 form-check">
 									<input type="checkbox" className="form-check-input" id="exampleCheck1" />
@@ -185,32 +229,28 @@ export const Home = () => {
 							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div className="modal-body">
-							<form className="row g-3">
-								<div className="col-md-6">
+							<form className="row g-3" onSubmit={(e) => { handleregister(e) }}>
+								<div className="col-md-12">
 									<label htmlFor="firstName" className="form-label">Nombre</label>
 									<input
 										type="text"
 										className="form-control"
 										id="firstName"
+										name="name"
 										required
+										onChange={(e) => setInforegistro({ ...inforegistro, name: e.target.value })}
 									/>
 								</div>
-								<div className="col-md-6">
-									<label htmlFor="lastName" className="form-label">Apellido</label>
-									<input
-										type="text"
-										className="form-control"
-										id="lastName"
-										required
-									/>
-								</div>
+
 								<div className="col-md-12">
 									<label htmlFor="email" className="form-label">Email</label>
 									<input
 										type="email"
 										className="form-control"
 										id="email"
+										name="email"
 										required
+										onChange={(e) => setInforegistro({ ...inforegistro, email: e.target.value })}
 									/>
 								</div>
 								<div className="col-md-12">
@@ -222,6 +262,8 @@ export const Home = () => {
 										required
 										pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
 										title="Debe tener mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número"
+										name="password"
+										onChange={(e) => setInforegistro({ ...inforegistro, password: e.target.value })}
 									/>
 									<div className="form-text">
 										Debe tener mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número.
