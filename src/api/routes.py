@@ -9,6 +9,7 @@ from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from api.models import db, User, Service, Gallery
+from models import Order, OrderServiceItem, OrderProductItem
 
 api = Blueprint('api', __name__)
 
@@ -137,13 +138,13 @@ def get_all_users():
 # //////////////
 
 
+# Obtener todos los servicios
 @api.route('/services', methods=['GET'])
 def get_services():
     services = Service.query.all()
-    services_list = [service.to_dict() for service in services]
-    return jsonify(services_list), 200
+    return jsonify([s.to_dict() for s in services]), 200
 
-
+# Obtener un servicio por ID
 @api.route('/services/<int:service_id>', methods=['GET'])
 def get_service(service_id):
     service = Service.query.get(service_id)
@@ -151,82 +152,103 @@ def get_service(service_id):
         return jsonify({"error": "Servicio no encontrado"}), 404
     return jsonify(service.to_dict()), 200
 
-
+# Crear un servicio (sin autenticación)
 @api.route('/services', methods=['POST'])
-@jwt_required()
 def create_service():
-    current_user_id = get_jwt_identity()
-    current_user = User.query.get(current_user_id)
-
-    if not current_user or not current_user.is_admin:
-        return jsonify({"msg": "Acceso denegado"}), 403
-
-    body = request.get_json()
-    name = body.get("name")
-    description = body.get("description")
-    price = body.get("price")
-    duration = body.get("duration")
-    image_url = body.get("image_url")
-
+    data = request.get_json()
+    name = data.get("name")
+    price = data.get("price")
     if not name or not price:
         return jsonify({"error": "Nombre y precio son obligatorios"}), 400
 
     new_service = Service(
         name=name,
-        description=description,
+        description=data.get("description"),
         price=price,
-        duration=duration,
-        image_url=image_url
+        duration=data.get("duration"),
+        image_url=data.get("image_url")
     )
-
     db.session.add(new_service)
     db.session.commit()
-
     return jsonify(new_service.to_dict()), 201
 
-
+# Actualizar un servicio por ID (sin autenticación)
 @api.route('/services/<int:service_id>', methods=['PUT'])
-@jwt_required()
 def update_service(service_id):
-    current_user_id = get_jwt_identity()
-    current_user = User.query.get(current_user_id)
-
-    if not current_user or not current_user.is_admin:
-        return jsonify({"msg": "Acceso denegado"}), 403
-
     service = Service.query.get(service_id)
     if not service:
         return jsonify({"error": "Servicio no encontrado"}), 404
 
-    body = request.get_json()
-    service.name = body.get("name", service.name)
-    service.description = body.get("description", service.description)
-    service.price = body.get("price", service.price)
-    service.duration = body.get("duration", service.duration)
-    service.image_url = body.get("image_url", service.image_url)
-
+    data = request.get_json()
+    service.name = data.get("name", service.name)
+    service.description = data.get("description", service.description)
+    service.price = data.get("price", service.price)
+    service.duration = data.get("duration", service.duration)
+    service.image_url = data.get("image_url", service.image_url)
     db.session.commit()
-
     return jsonify(service.to_dict()), 200
 
-
+# Eliminar un servicio por ID (sin autenticación)
 @api.route('/services/<int:service_id>', methods=['DELETE'])
-@jwt_required()
 def delete_service(service_id):
-    current_user_id = get_jwt_identity()
-    current_user = User.query.get(current_user_id)
-
-    if not current_user or not current_user.is_admin:
-        return jsonify({"msg": "Acceso denegado"}), 403
-
     service = Service.query.get(service_id)
     if not service:
         return jsonify({"error": "Servicio no encontrado"}), 404
 
     db.session.delete(service)
     db.session.commit()
-
     return jsonify({"msg": "Servicio eliminado correctamente"}), 200
+
+# ////////////////
+
+# Orders
+
+# ////////////////
+
+@api.route('/orders', methods=['POST'])
+def create_order():
+    data = request.get_json()
+
+    # Recoge la información del cliente
+    customer_name = data.get('customer_name')
+    customer_email = data.get('customer_email')
+    services = data.get('services', [])
+    products = data.get('products', [])
+
+    if not customer_name or not customer_email:
+        return jsonify({"error": "Nombre y correo son obligatorios"}), 400
+
+    # Crea la orden
+    new_order = Order(
+        customer_name=customer_name,
+        customer_email=customer_email
+    )
+    db.session.add(new_order)
+    db.session.flush()  # Necesario para obtener el id antes de agregar los items
+
+    # Agrega servicios a la orden
+    for s in services:
+        order_service_item = OrderServiceItem(
+            order_id=new_order.id,
+            service_id=s['service_id'],
+            service_name=s['service_name'],
+            price=s['price']
+        )
+        db.session.add(order_service_item)
+
+    # Agrega productos a la orden
+    for p in products:
+        order_product_item = OrderProductItem(
+            order_id=new_order.id,
+            product_id=p['product_id'],
+            product_name=p['product_name'],
+            price=p['price'],
+            quantity=p.get('quantity', 1)
+        )
+        db.session.add(order_product_item)
+
+    db.session.commit()
+    return jsonify(new_order.to_dict()), 201
 
 # ////////////////
 
