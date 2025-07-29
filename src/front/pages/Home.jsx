@@ -10,6 +10,11 @@ export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
 
+	// ESTADO PARA SERVICIOS DESDE LA API
+	const [servicios, setServicios] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+
 	const [inforegistro, setInforegistro] = useState({
 		name: "",
 		email: "",
@@ -66,45 +71,28 @@ export const Home = () => {
 			alert("Error al iniciar sesión: " + (data.error || data.msg));
 		}
 	};
-	
-	const servicios = [
-		{
-			title: "Corte de Cabello",
-			description: "Corte personalizado según tu estilo, realizado por barberos expertos.",
-			image: "https://i.pinimg.com/736x/02/82/d0/0282d032df8a7e776f886c075da596ad.jpg"
-		},
-		{
-			title: "Corte de Barba",
-			description: "Modelado y perfilado profesional para tu barba, usando técnicas precisas y productos de alta calidad.",
-			image: "https://i.pinimg.com/1200x/91/d6/03/91d6037c183ccc9644cdd59a70857524.jpg"
-		},
-		{
-			title: "Corte para Niños",
-			description: "Un ambiente divertido y relajado donde los más pequeños disfrutan de un corte diseñado especialmente para ellos.",
-			image: "https://i.pinimg.com/1200x/ee/43/88/ee4388d7c977c41b02a4cacb5f8638a2.jpg"
-		},
-		{
-			title: "Afeitado Degradado",
-			description: "Logra un acabado impecable y definido con nuestro afeitado degradado, perfecto para un look sofisticado y moderno.",
-			image: "https://i.pinimg.com/1200x/87/e2/4f/87e24f4299ff167b7ec559c4428d954a.jpg"
-		},
-		{
-			title: "Decoloración",
-			description: "Transforma tu cabello con una decoloración profesional que cuida tu melena mientras logra el tono deseado.",
-			image: "https://i.pinimg.com/736x/05/72/6c/05726c747639c4f2c98ebe581fe4fe30.jpg"
-		},
-		{
-			title: "Barba",
-			description: "Tratamientos especializados para barbas: desde modelado hasta hidratación, para un aspecto pulido y saludable.",
-			image: "https://i.pinimg.com/1200x/24/e5/e2/24e5e2310537f980e9a3dc8acfafa0c7.jpg"
-		},
-		{
-			title: "Corte de Cabello con Diseño",
-			description: "Cortes de cabello con diseños únicos y personalizados, realizados por nuestros barberos expertos.",
-			image: "https://i.pinimg.com/736x/3b/9a/a6/3b9aa688d9baf5cc5121337608649b86.jpg"
-		}
 
-	];
+	useEffect(() => {
+		const fetchServicios = async () => {
+			try {
+				const resp = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/services");
+				if (!resp.ok) throw new Error("No se pudo obtener servicios");
+				let data = await resp.json();
+				// Mapeo: backend a frontend
+				data = data.map(s => ({
+					...s,
+					title: s.name,
+					image: s.image_url
+				}));
+				setServicios(data);
+			} catch (err) {
+				setError(err.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+		fetchServicios();
+	}, []);
 
 	return (
 		<div className="container-fluid p-0 m-0">
@@ -124,7 +112,11 @@ export const Home = () => {
  /* SERVICE*/
 			<div className="container my-5 services-section">
 				<h2 className="mb-4 text-center">Nuestros Servicios</h2>
-				<CenterModeCarousel id="service" servicios={servicios} />
+				{loading && <p>Cargando servicios...</p>}
+				{error && <p>Error: {error}</p>}
+				{!loading && !error &&
+					<CenterModeCarousel id="service" servicios={servicios} />
+				}
 			</div>
 /* CONTACT*/
 			<div className="contacto-section-wrapper">

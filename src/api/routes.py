@@ -138,13 +138,13 @@ def get_all_users():
 # //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-# Obtener todos los servicios
+# Obtener todos los servicios (público)
 @api.route('/services', methods=['GET'])
 def get_services():
-    services = Service.query.all()
+    services = Service.query.filter_by(is_active=True).all()
     return jsonify([s.to_dict() for s in services]), 200
 
-# Obtener un servicio por ID
+# Obtener un servicio por ID (público)
 @api.route('/services/<int:service_id>', methods=['GET'])
 def get_service(service_id):
     service = Service.query.get(service_id)
@@ -152,9 +152,15 @@ def get_service(service_id):
         return jsonify({"error": "Servicio no encontrado"}), 404
     return jsonify(service.to_dict()), 200
 
-# Crear un servicio (sin autenticación)
+# Crear un servicio (sólo admin)
 @api.route('/services', methods=['POST'])
+@jwt_required()
 def create_service():
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if not user or not user.is_admin:
+        return jsonify({"error": "No autorizado"}), 403
+
     data = request.get_json()
     name = data.get("name")
     price = data.get("price")
@@ -172,9 +178,15 @@ def create_service():
     db.session.commit()
     return jsonify(new_service.to_dict()), 201
 
-# Actualizar un servicio por ID (sin autenticación)
+# Actualizar un servicio por ID (sólo admin)
 @api.route('/services/<int:service_id>', methods=['PUT'])
+@jwt_required()
 def update_service(service_id):
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if not user or not user.is_admin:
+        return jsonify({"error": "No autorizado"}), 403
+
     service = Service.query.get(service_id)
     if not service:
         return jsonify({"error": "Servicio no encontrado"}), 404
@@ -188,9 +200,15 @@ def update_service(service_id):
     db.session.commit()
     return jsonify(service.to_dict()), 200
 
-# Eliminar un servicio por ID (sin autenticación)
+# Eliminar un servicio por ID (sólo admin)
 @api.route('/services/<int:service_id>', methods=['DELETE'])
+@jwt_required()
 def delete_service(service_id):
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if not user or not user.is_admin:
+        return jsonify({"error": "No autorizado"}), 403
+
     service = Service.query.get(service_id)
     if not service:
         return jsonify({"error": "Servicio no encontrado"}), 404
