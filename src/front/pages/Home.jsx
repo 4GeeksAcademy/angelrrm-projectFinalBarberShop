@@ -66,6 +66,7 @@ export const Home = () => {
 			alert("Error al iniciar sesión: " + (data.error || data.msg));
 		}
 	};
+	
 	const servicios = [
 		{
 			title: "Corte de Cabello",
@@ -105,9 +106,9 @@ export const Home = () => {
 
 	];
 
-
 	return (
 		<div className="container-fluid p-0 m-0">
+/* BANNER*/
 			<header className="hero-banner">
 				<div className="hero-overlay">
 					<h1 className="display-4">Bienvenido a Godfather Barbería</h1>
@@ -120,12 +121,12 @@ export const Home = () => {
 					</button>
 				</div>
 			</header>
-
+ /* SERVICE*/
 			<div className="container my-5 services-section">
 				<h2 className="mb-4 text-center">Nuestros Servicios</h2>
 				<CenterModeCarousel id="service" servicios={servicios} />
 			</div>
-
+/* CONTACT*/
 			<div className="contacto-section-wrapper">
 				<div className="container contacto-section my-5">
 					<h2 className="mb-4 text-center">Contacto</h2>
@@ -173,8 +174,7 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
-
-
+/* LOGIN MODAL*/
 			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog">
 					<div className="modal-content">
@@ -220,7 +220,7 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
-
+/* REGISTRE MODAL*/
 			<div className="modal fade" id="registroModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog">
 					<div className="modal-content">
