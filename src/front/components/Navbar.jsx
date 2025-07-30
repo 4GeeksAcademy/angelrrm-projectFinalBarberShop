@@ -24,13 +24,13 @@ export const Navbar = () => {
 				<div className="navbar-nav" id="navbarNav">
 					<ul className="navbar-nav" style={{ flexDirection: "row", gap: "15px" }}>
 						<li className="nav-item active">
-							<a className="nav-link" href="#">Reserva tu Cita <span className="sr-only">(current)</span></a>
+							<a className="nav-link" href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo">Reserva tu Cita <span className="sr-only">(current)</span></a>
 						</li>
 						<li className="nav-item">
 							<a className="nav-link" href="/products">Productos</a>
 						</li>
 						<li className="nav-item">
-							<a className="nav-link" href="#contacto-section-wrapper">Contacto</a>
+							<a className="nav-link" href="/#contacto">Contacto</a>
 						</li>
 						<li className="nav-item">
 							<a className="nav-link" href="/sobre-nosotros">Sobre Nosotros</a>

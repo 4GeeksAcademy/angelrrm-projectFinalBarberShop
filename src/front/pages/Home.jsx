@@ -105,7 +105,9 @@ export const Home = () => {
 						className="hero-logo"
 						style={{ width: "60%", height: "auto" }} />
 					<button type="button" className="btn btn-none hero-btn">
-						¡Reserva tu cita!
+						<a href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo" target="_blank" rel="noopener noreferrer">
+							¡Reserva tu cita!
+						</a>
 					</button>
 				</div>
 			</header>
@@ -119,6 +121,7 @@ export const Home = () => {
 				}
 			</div>
 /* CONTACT*/
+      <section id="contacto">
 			<div className="contacto-section-wrapper">
 				<div className="container contacto-section my-5">
 					<h2 className="mb-4 text-center">Contacto</h2>
@@ -166,6 +169,7 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
+		</section>
 /* LOGIN MODAL*/
 			<div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div className="modal-dialog">
@@ -272,7 +276,6 @@ export const Home = () => {
 					</div>
 				</div>
 			</div>
-
 
 		</div >
 	);
