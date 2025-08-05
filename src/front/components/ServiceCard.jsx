@@ -8,14 +8,11 @@ const ServiceCard = ({ title, description, image }) => {
       </div>
       <h3 className="service-card-title">{title}</h3>
       <p className="service-card-description">{description}</p>
-      <a
-        href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="btn btn-none submit mt-2 text-decoration-none text-reset"
-      >
-        Reservar este servicio
-      </a>
+					<button type="button" className="btn btn-none hero-btn">
+						<a href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo" target="_blank" rel="noopener noreferrer" className="text-decoration-none text-dark">
+							¡Reserva tu cita!
+						</a>
+					</button>
     </div>
   );
 };
