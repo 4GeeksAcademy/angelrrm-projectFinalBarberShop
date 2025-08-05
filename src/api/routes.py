@@ -8,7 +8,7 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
-from api.models import db, User, Service, Gallery
+from api.models import db, User, Service
 from .models import Order, OrderServiceItem, OrderProductItem
 
 api = Blueprint('api', __name__)
@@ -268,87 +268,3 @@ def create_order():
     db.session.commit()
     return jsonify(new_order.to_dict()), 201
 
-# ////////////////
-
-# gallery
-
-# //////////////
-
-
-@api.route('/gallery', methods=['GET'])
-def get_gallery():
-    gallery_items = Gallery.query.all()
-    gallery_list = [item.to_dict() for item in gallery_items]
-    return jsonify(gallery_list), 200
-
-
-def is_admin_user(user_id):
-    user = User.query.get(user_id)
-    return user and user.is_admin
-
-
-@api.route('/gallery', methods=['POST'])
-@jwt_required()
-def add_photo():
-    user_id = get_jwt_identity()
-    if not is_admin_user(user_id):
-        return jsonify({"msg": "Solo los administradores pueden agregar fotos"}), 403
-
-    body = request.get_json()
-    image_url = body.get('image_url')
-    title = body.get('title')
-    description = body.get('description')
-    category = body.get('category')
-    is_featured = body.get('is_featured', False)
-
-    if not image_url:
-        return jsonify({"msg": "La URL de la imagen es obligatoria"}), 400
-
-    new_photo = Gallery(
-        image_url=image_url,
-        title=title,
-        description=description,
-        category=category,
-        is_featured=is_featured
-    )
-    db.session.add(new_photo)
-    db.session.commit()
-    return jsonify(new_photo.to_dict()), 201
-
-
-@api.route('/gallery/<int:photo_id>', methods=['PUT'])
-@jwt_required()
-def edit_photo(photo_id):
-    user_id = get_jwt_identity()
-    if not is_admin_user(user_id):
-        return jsonify({"msg": "Solo los administradores pueden editar fotos"}), 403
-
-    photo = Gallery.query.get(photo_id)
-    if not photo:
-        return jsonify({"msg": "Foto no encontrada"}), 404
-
-    body = request.get_json()
-    photo.image_url = body.get('image_url', photo.image_url)
-    photo.title = body.get('title', photo.title)
-    photo.description = body.get('description', photo.description)
-    photo.category = body.get('category', photo.category)
-    photo.is_featured = body.get('is_featured', photo.is_featured)
-
-    db.session.commit()
-    return jsonify(photo.to_dict()), 200
-
-
-@api.route('/gallery/<int:photo_id>', methods=['DELETE'])
-@jwt_required()
-def delete_photo(photo_id):
-    user_id = get_jwt_identity()
-    if not is_admin_user(user_id):
-        return jsonify({"msg": "Solo los administradores pueden eliminar fotos"}), 403
-
-    photo = Gallery.query.get(photo_id)
-    if not photo:
-        return jsonify({"msg": "Foto no encontrada"}), 404
-
-    db.session.delete(photo)
-    db.session.commit()
-    return jsonify({"msg": "Foto eliminada"}), 200
