@@ -1,5 +1,5 @@
 body, footer {
-  background-color: #232323;
+  background-color: #232323!important;
 }
 body,
 html {
@@ -44,7 +44,7 @@ a {
 /* Login button styles */
 
 .login {
-  color: #dfb565;
+  color: #dfb565 !important;
   font-weight: 600;
   font-size: 1.1rem;
   transition: color 0.2s;
@@ -103,7 +103,7 @@ a {
 
 /* Modal styles */
 .modal-content {
-  background: #222;
+  background: #222 !important;
   color: #fff;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
@@ -229,6 +229,7 @@ input[type="checkbox"],
   background: #292929;
   border-radius: 4px;
 }
+
 
 /* Services section styles */
 
