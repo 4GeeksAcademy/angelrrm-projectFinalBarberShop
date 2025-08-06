@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 from sqlalchemy.exc import NoResultFound
-from api.models import db, User
+from api.models import db, User, Service, CartItem, Products
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
@@ -217,54 +217,102 @@ def delete_service(service_id):
     db.session.commit()
     return jsonify({"msg": "Servicio eliminado correctamente"}), 200
 
-# ////////////////////////////////////////////////////////////////////////////////////////////////
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+# Carrito de compras (Shopping Cart)
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-# Orders
+# Obtener el carrito del usuario autenticado
+@api.route('/cart', methods=['GET'])
+@jwt_required()
+def get_cart():
+    user_id = get_jwt_identity()
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    return jsonify([item.to_dict() for item in cart_items]), 200
 
-# ////////////////////////////////////////////////////////////////////////////////////////////////
-
-@api.route('/orders', methods=['POST'])
-def create_order():
+# Añadir producto al carrito
+@api.route('/cart', methods=['POST'])
+@jwt_required()
+def add_to_cart():
+    user_id = get_jwt_identity()
     data = request.get_json()
+    product_id = data.get('product_id')
+    quantity = data.get('quantity', 1)
 
-    # Recoge la información del cliente
-    customer_name = data.get('customer_name')
-    customer_email = data.get('customer_email')
-    services = data.get('services', [])
-    products = data.get('products', [])
+    if not product_id or quantity <= 0:
+        return jsonify({"error": "Producto y cantidad son obligatorios"}), 400
 
-    if not customer_name or not customer_email:
-        return jsonify({"error": "Nombre y correo son obligatorios"}), 400
+    # Verifica si el producto existe
+    product = Products.query.get(product_id)
+    if not product:
+        return jsonify({"error": "Producto no existe"}), 404
 
-    # Crea la orden
-    new_order = Order(
-        customer_name=customer_name,
-        customer_email=customer_email
-    )
-    db.session.add(new_order)
-    db.session.flush()  # Necesario para obtener el id antes de agregar los items
-
-    # Agrega servicios a la orden
-    for s in services:
-        order_service_item = OrderServiceItem(
-            order_id=new_order.id,
-            service_id=s['service_id'],
-            service_name=s['service_name'],
-            price=s['price']
-        )
-        db.session.add(order_service_item)
-
-    # Agrega productos a la orden
-    for p in products:
-        order_product_item = OrderProductItem(
-            order_id=new_order.id,
-            product_id=p['product_id'],
-            product_name=p['product_name'],
-            price=p['price'],
-            quantity=p.get('quantity', 1)
-        )
-        db.session.add(order_product_item)
+    # Verifica si el producto ya está en el carrito
+    existing_item = CartItem.query.filter_by(user_id=user_id, product_id=product_id).first()
+    if existing_item:
+        existing_item.quantity += quantity
+    else:
+        new_item = CartItem(user_id=user_id, product_id=product_id, quantity=quantity)
+        db.session.add(new_item)
 
     db.session.commit()
-    return jsonify(new_order.to_dict()), 201
 
+    # Devuelve el carrito actualizado
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    return jsonify([item.to_dict() for item in cart_items]), 201
+
+# Actualizar cantidad de un producto en el carrito
+@api.route('/cart/<int:item_id>', methods=['PUT'])
+@jwt_required()
+def update_cart_item(item_id):
+    user_id = get_jwt_identity()
+    data = request.get_json()
+    new_quantity = data.get('quantity')
+
+    if not isinstance(new_quantity, int) or new_quantity < 1:
+        return jsonify({"error": "Cantidad inválida"}), 400
+
+    item = CartItem.query.filter_by(id=item_id, user_id=user_id).first()
+    if not item:
+        return jsonify({"error": "Item no encontrado en el carrito"}), 404
+
+    item.quantity = new_quantity
+    db.session.commit()
+
+    # Devuelve el carrito actualizado
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    return jsonify([item.to_dict() for item in cart_items]), 200
+
+# Eliminar producto del carrito
+@api.route('/cart/<int:item_id>', methods=['DELETE'])
+@jwt_required()
+def remove_from_cart(item_id):
+    user_id = get_jwt_identity()
+    item = CartItem.query.filter_by(id=item_id, user_id=user_id).first()
+
+    if not item:
+        return jsonify({"error": "Item no encontrado en el carrito"}), 404
+
+    db.session.delete(item)
+    db.session.commit()
+
+    # Devuelve el carrito actualizado
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+    return jsonify([item.to_dict() for item in cart_items]), 200
+
+# Checkout del carrito (vaciar y "comprar")
+@api.route('/cart/checkout', methods=['POST'])
+@jwt_required()
+def checkout_cart():
+    user_id = get_jwt_identity()
+    cart_items = CartItem.query.filter_by(user_id=user_id).all()
+
+    if not cart_items:
+        return jsonify({"error": "El carrito está vacío"}), 400
+
+    # Aquí podrías procesar el pago y crear una orden
+    # Por simplicidad, solo eliminamos los items del carrito
+    for item in cart_items:
+        db.session.delete(item)
+
+    db.session.commit()
+    return jsonify({"msg": "Compra realizada con éxito"}), 200

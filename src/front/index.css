@@ -35,7 +35,14 @@ a {
 .nav-link {
   color: #ffffff !important;
   transition: color 0.2s;
+  margin: 0px 10px !important;
 }
+
+.navbar-nav {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 
 .nav-link:hover {
   color: #dfb565 !important;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from '../assets/img/logo.png';
-
+import { FaShoppingCart } from "react-icons/fa";
 export const Navbar = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -55,8 +55,15 @@ export const Navbar = () => {
                             <Link className="nav-link" to="/sobre-nosotros">Sobre Nosotros</Link>
                         </li>
                     </ul>
-                    {/* Login a la derecha */}
+                    {/* Login & Cart */}
                     <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/cart" title="Ver carrito">
+                                <FaShoppingCart size={22} />
+                            </Link>
+                        </li>
+
                         <li className="nav-item">
                             <button
                                 type="button"
