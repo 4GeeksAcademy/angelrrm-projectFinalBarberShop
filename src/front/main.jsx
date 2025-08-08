@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";  // Import RouterProvider to 
 import { router } from "./routes";  // Import the router configuration
 import { StoreProvider } from './hooks/useGlobalReducer';  // Import the StoreProvider for global state management
 import { BackendURL } from './components/BackendURL';
+import { CartProvider } from './components/Navbar';  // Import CartProvider for cart state management
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -18,11 +19,13 @@ const Main = () => {
     return (
         <React.StrictMode>  
             {/* Provide global state to all components */}
+             <CartProvider>
             <StoreProvider> 
                 {/* Set up routing for the application */} 
                 <RouterProvider router={router}>
                 </RouterProvider>
             </StoreProvider>
+            </CartProvider>
         </React.StrictMode>
     );
 }

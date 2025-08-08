@@ -218,7 +218,9 @@ def delete_service(service_id):
     return jsonify({"msg": "Servicio eliminado correctamente"}), 200
 
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 # Carrito de compras (Shopping Cart)
+
 # ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 # Obtener el carrito del usuario autenticado
@@ -316,3 +318,96 @@ def checkout_cart():
 
     db.session.commit()
     return jsonify({"msg": "Compra realizada con éxito"}), 200
+
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+# Products
+
+# //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+# Obtener todos los productos (público)
+@api.route('/products', methods=['GET'])
+def get_products():
+    products = Products.query.all()
+    return jsonify([p.to_dict() for p in products]), 200
+
+# Obtener un producto por ID (público)
+@api.route('/products/<int:product_id>', methods=['GET'])
+def get_product(product_id):
+    product = Products.query.get(product_id)
+    if not product:
+        return jsonify({"error": "Producto no encontrado"}), 404
+    return jsonify(product.to_dict()), 200
+
+# Crear un producto (solo admin)
+@api.route('/products', methods=['POST'])
+@jwt_required()
+def create_product():
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if not user or not user.is_admin:
+        return jsonify({"error": "No autorizado"}), 403
+
+    data = request.get_json()
+    name = data.get("name")
+    brand = data.get("brand")
+    type_ = data.get("type")
+    description = data.get("description")
+    price = data.get("price")
+    image_url = data.get("image_url")
+
+    if not name or not brand or not price:
+        return jsonify({"error": "Nombre, marca y precio son obligatorios"}), 400
+
+    new_product = Products(
+        name=name,
+        brand=brand,
+        type=type_,
+        description=description,
+        price=price,
+        image_url=image_url
+    )
+    db.session.add(new_product)
+    db.session.commit()
+    return jsonify(new_product.to_dict()), 201
+
+# Actualizar un producto (solo admin)
+@api.route('/products/<int:product_id>', methods=['PUT'])
+@jwt_required()
+def update_product(product_id):
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if not user or not user.is_admin:
+        return jsonify({"error": "No autorizado"}), 403
+
+    product = Products.query.get(product_id)
+    if not product:
+        return jsonify({"error": "Producto no encontrado"}), 404
+
+    data = request.get_json()
+    product.name = data.get("name", product.name)
+    product.brand = data.get("brand", product.brand)
+    product.type = data.get("type", product.type)
+    product.description = data.get("description", product.description)
+    product.price = data.get("price", product.price)
+    product.image_url = data.get("image_url", product.image_url)
+
+    db.session.commit()
+    return jsonify(product.to_dict()), 200
+
+# Eliminar un producto (solo admin)
+@api.route('/products/<int:product_id>', methods=['DELETE'])
+@jwt_required()
+def delete_product(product_id):
+    user_id = get_jwt_identity()
+    user = User.query.get(user_id)
+    if not user or not user.is_admin:
+        return jsonify({"error": "No autorizado"}), 403
+
+    product = Products.query.get(product_id)
+    if not product:
+        return jsonify({"error": "Producto no encontrado"}), 404
+
+    db.session.delete(product)
+    db.session.commit()
+    return jsonify({"msg": "Producto eliminado correctamente"}), 200
