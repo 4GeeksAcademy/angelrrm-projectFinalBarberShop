@@ -1,5 +1,5 @@
 export const getCart = async (token) => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}api/cart`, {
         headers: {
             "Authorization": `Bearer ${token}`
         }

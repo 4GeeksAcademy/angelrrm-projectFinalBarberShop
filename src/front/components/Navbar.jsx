@@ -14,7 +14,7 @@ export const CartProvider = ({ children }) => {
     const updateCartCount = () => {
         const token = sessionStorage.getItem("token");
         if (token) {
-            fetch(`${import.meta.env.VITE_API_URL}/cart`, {
+            fetch(`${import.meta.env.VITE_BACKEND_URL}api/cart`, {
                 headers: {
                     "Authorization": `Bearer ${token}`
                 }

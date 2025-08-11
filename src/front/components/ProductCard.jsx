@@ -8,14 +8,14 @@ const ProductCard = ({ brand, type, image, description, price, onAddToCart, addi
       <h3 className="product-brand">{brand}</h3>
       <p className="product-type">{type}</p>
       {price !== undefined && (
-        <p className="product-price" style={{ fontWeight: "bold", color: "#26a69a" }}>
+        <p className="product-price" style={{ fontWeight: "bold", color: "#dcb341ff" }}>
           €{parseFloat(price).toFixed(2)}
         </p>
       )}
       {description && <p className="product-description">{description}</p>}
       {onAddToCart && (
         <button
-          className="btn btn-primary mt-2"
+          className="btn btn-none hero-btn mt-2"
           onClick={onAddToCart}
           disabled={adding}
         >
