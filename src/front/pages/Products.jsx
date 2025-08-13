@@ -16,7 +16,7 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}api/products`);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/products`);
         if (!response.ok) throw new Error("Error al cargar productos");
         const data = await response.json();
         setProducts(data);
@@ -90,7 +90,7 @@ const Products = () => {
     setAddingToCart(prev => ({ ...prev, [productId]: true }));
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}api/cart`, {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

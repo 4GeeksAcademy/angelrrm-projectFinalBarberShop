@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 from sqlalchemy.exc import NoResultFound
-from api.models import db, User, Service, CartItem, Products
+from api.models import db, User, Service, CartItem, Products, Order, OrderProductItem
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
@@ -15,7 +15,6 @@ api = Blueprint('api', __name__)
 
 CORS(api)
 # Allow CORS requests to this API
-
 
 @api.route('/hello', methods=['GET'])
 def handle_hello():

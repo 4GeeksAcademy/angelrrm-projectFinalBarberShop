@@ -34,7 +34,7 @@ const Cart = () => {
     const handleRemove = async (itemId) => {
         const token = sessionStorage.getItem("token");
         try {
-            await fetch(`${import.meta.env.VITE_BACKEND_URL}api/cart/${itemId}`, {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/${itemId}`, {
                 method: "DELETE",
                 headers: { "Authorization": `Bearer ${token}` }
             });
@@ -48,7 +48,7 @@ const Cart = () => {
     const updateQuantity = async (itemId, newQuantity) => {
         const token = sessionStorage.getItem("token");
         try {
-            await fetch(`${import.meta.env.VITE_BACKEND_URL}api/cart/${itemId}`, {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/${itemId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const Cart = () => {
         setCheckingOut(true);
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}api/cart/checkout`, {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/checkout`, {
                 method: "POST",
                 headers: { "Authorization": `Bearer ${token}` }
             });
