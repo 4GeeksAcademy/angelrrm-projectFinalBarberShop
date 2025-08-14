@@ -1,0 +1,153 @@
+/* ---- GODFATHER THEME (scoped) ---- */
+:root {
+  --gf-bg: #0c0c0c;
+  --gf-card: #121212;
+  --gf-muted: #b7b7b7;
+  --gf-text: #f5f5f5;
+  --gf-gold: #dfb565;           /* tu dorado de marca */
+  --gf-gold-2: #c9a24f;
+  --gf-accent: #8b0000;         /* rojo borgoña sutil */
+}
+
+.gf-cart {
+  color: var(--gf-text);
+}
+
+.gf-cart .page-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: var(--gf-gold);
+  text-shadow: 0 1px 0 rgba(0,0,0,.6);
+  border-left: 4px solid var(--gf-gold);
+  padding-left: .6rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Lista de items */
+.gf-cart .list-group {
+  background: transparent;
+  border: 0;
+  gap: 10px;
+}
+
+.gf-cart .list-group-item {
+  background: linear-gradient(180deg, #121212, #0f0f0f);
+  border: 1px solid rgba(223, 181, 101, 0.28);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .2s ease;
+}
+
+.gf-cart .list-group-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.45);
+  border-color: rgba(223, 181, 101, 0.5);
+}
+
+/* Imagen del producto con marco */
+.gf-cart .item-thumb {
+  width: 64px; height: 64px; object-fit: cover; margin-right: 14px; border-radius: 10px;
+  border: 1px solid rgba(223, 181, 101, .35);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.6);
+}
+
+/* Nombre y precio */
+.gf-cart .item-name {
+  font-weight: 600;
+  color: var(--gf-text);
+}
+.gf-cart .item-price {
+  color: var(--gf-gold);
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+/* Botones cantidad */
+.gf-cart .qty-btn {
+  border-radius: 50%;
+  width: 32px; height: 32px;
+  line-height: 30px;
+  text-align: center;
+  padding: 0;
+  border: 1px solid var(--gf-gold);
+  background: transparent;
+  color: var(--gf-gold);
+  transition: background .15s ease, color .15s ease, transform .06s ease;
+}
+.gf-cart .qty-btn:hover { background: var(--gf-gold); color: #111; }
+.gf-cart .qty-btn:active { transform: scale(.96); }
+
+.gf-cart .qty-value {
+  min-width: 32px;
+  text-align: center;
+  color: var(--gf-text);
+}
+
+/* Botón eliminar (sobrio) */
+.gf-cart .btn-remove {
+  border: 1px solid rgba(139,0,0,.6);
+  background: transparent;
+  color: #ffb3b3;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.gf-cart .btn-remove:hover {
+  background: rgba(139,0,0,.9);
+  color: #fff;
+  border-color: rgba(139,0,0,1);
+}
+
+/* Card del total */
+.gf-cart .card {
+  background: linear-gradient(180deg, #151515, #101010);
+  border: 1px solid rgba(223, 181, 101, .35);
+  border-radius: 18px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.45);
+}
+.gf-cart .card-body {
+  padding: 20px;
+}
+.gf-cart .total-label {
+  color: var(--gf-muted);
+  font-weight: 500;
+}
+.gf-cart .total-value {
+  color: var(--gf-gold);
+  font-weight: 800;
+  font-size: 1.4rem;
+}
+
+/* Botón checkout “anillo dorado” */
+.gf-cart .btn-checkout {
+  position: relative;
+  border: none;
+  padding: 12px 22px;
+  font-weight: 700;
+  color: #111;
+  background: linear-gradient(180deg, var(--gf-gold), var(--gf-gold-2));
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(223, 181, 101, .28), inset 0 1px 0 rgba(255,255,255,.25);
+  transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
+}
+.gf-cart .btn-checkout:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(223, 181, 101, .38), inset 0 1px 0 rgba(255,255,255,.3);
+  filter: saturate(1.05);
+}
+.gf-cart .btn-checkout:active { transform: translateY(0); }
+
+/* Alert vacío en dorado */
+.gf-cart .alert-warning {
+  background: #1a1405;
+  border-color: rgba(223,181,101,.45);
+  color: var(--gf-gold);
+}
+
+/* Loading */
+.gf-cart .loading {
+  color: var(--gf-muted);
+}
+
+/* Utilidades */
+.gf-cart .muted { color: var(--gf-muted); }

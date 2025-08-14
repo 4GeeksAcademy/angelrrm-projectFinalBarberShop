@@ -1,0 +1,178 @@
+/* ===== GODFATHER MODALS (scoped) ===== */
+:root{
+  --gf-gold:#dfb565;
+  --gf-gold-2:#c9a24f;
+  --gf-dark-1:#232323;
+  --gf-dark-2:#1b1b1b;
+  --gf-dark-3:#121212;
+  --gf-text:#ffffff;
+  --gf-muted:#bfbfbf;
+  --gf-red:#8b0000;
+  --gf-red-2:#ff6a6a;
+}
+
+/* Backdrop más cinematográfico */
+.gf-modal .modal-backdrop,
+.modal-backdrop.gf-modal-backdrop {
+  background-color:#000;
+}
+.gf-modal .modal-backdrop.show,
+.modal-backdrop.gf-modal-backdrop.show { opacity:.6; }
+
+/* Contenedor principal */
+.gf-modal .modal-content{
+  background: linear-gradient(180deg, var(--gf-dark-2), var(--gf-dark-3)) !important;
+  color: var(--gf-text);
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.55);
+  border: 1px solid rgba(223,181,101,.35);
+  overflow: hidden;
+}
+
+/* Header */
+.gf-modal .modal-header{
+  border-bottom: 1px solid rgba(223,181,101,.35);
+  background: linear-gradient(180deg, var(--gf-dark-1), var(--gf-dark-2));
+  color: var(--gf-gold);
+  border-radius: 16px 16px 0 0;
+}
+.gf-modal .modal-title{
+  color: var(--gf-gold);
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing:.02em;
+  text-shadow:0 1px 0 rgba(0,0,0,.6);
+}
+
+/* Botón cerrar */
+.gf-modal .btn-close{
+  filter: invert(80%);
+  opacity:.8;
+}
+.gf-modal .btn-close:hover{ opacity:1; }
+
+/* Body */
+.gf-modal .modal-body{
+  background: var(--gf-dark-1);
+  border-radius: 0 0 16px 16px;
+}
+
+/* Footer */
+.gf-modal .modal-footer{
+  border-top: 1px solid rgba(223,181,101,.35);
+  background: var(--gf-dark-1);
+}
+
+/* Labels */
+.gf-modal .form-label,
+.gf-modal .form-check-label{
+  color: var(--gf-gold);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Inputs */
+.gf-modal .form-control{
+  background: #292929;
+  color: var(--gf-text);
+  border: 1.5px solid rgba(223,181,101,.25);
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  transition: border .2s, box-shadow .2s, background .2s;
+}
+.gf-modal .form-control:focus{
+  border: 1.5px solid var(--gf-gold);
+  box-shadow: 0 0 0 3px rgba(223,181,101,.25);
+  background: #232323;
+  color: var(--gf-text);
+}
+.gf-modal .form-control::placeholder{
+  color: rgba(223,181,101,.75);
+  opacity:1;
+}
+
+/* Validaciones (opcional) */
+.gf-modal .is-invalid{ border-color:#dc3545; }
+.gf-modal .is-valid{ border-color:#2ecc71; }
+.gf-modal .form-text{ color: var(--gf-muted); font-size:.95rem; }
+
+/* Checkboxes / radios */
+.gf-modal .form-check-input{
+  background:#292929;
+  border: 1px solid rgba(223,181,101,.35);
+  border-radius:4px;
+}
+.gf-modal .form-check-input:checked{
+  background-color: var(--gf-gold);
+  border-color: var(--gf-gold);
+}
+
+/* Botón primario (Login/Register submit) */
+.gf-modal .btn-primary,
+.gf-modal .submit{
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.05rem;
+  padding: 10px 22px;
+  color:#111 !important;
+  background: linear-gradient(180deg, var(--gf-gold), var(--gf-gold-2));
+  box-shadow: 0 8px 22px rgba(223,181,101,.28), inset 0 1px 0 rgba(255,255,255,.25);
+  transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
+  /* elimina márgenes raros heredados */
+  margin: 0;
+}
+.gf-modal .btn-primary:hover,
+.gf-modal .submit:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(223,181,101,.38), inset 0 1px 0 rgba(255,255,255,.3);
+  filter: saturate(1.05);
+}
+.gf-modal .btn-primary:active,
+.gf-modal .submit:active{ transform: translateY(0); }
+.gf-modal .btn-primary:disabled{ opacity:.7; cursor:not-allowed; }
+
+/* Botón “ghost” (Register alternativo) */
+.gf-modal .register{
+  background: transparent !important;
+  color: var(--gf-gold) !important;
+  font-weight: 700;
+  border: 1px solid rgba(223,181,101,.45);
+  border-radius: 10px;
+  padding: 8px 18px;
+  transition: background .2s, color .2s, border-color .2s, transform .08s;
+}
+.gf-modal .register:hover{
+  background: var(--gf-gold) !important;
+  color: #111 !important;
+  border-color: var(--gf-gold);
+  transform: translateY(-1px);
+}
+
+/* Botón peligro (cancelar/eliminar) */
+.gf-modal .btn-danger,
+.gf-modal .cancelar{
+  background: transparent;
+  color: #ffb3b3 !important;
+  border: 1px solid rgba(139,0,0,.6);
+  border-radius: 10px;
+  font-weight: 700;
+  padding: 8px 18px;
+  transition: background .18s, color .18s, border-color .18s, transform .08s;
+}
+.gf-modal .btn-danger:hover,
+.gf-modal .cancelar:hover{
+  background: var(--gf-red);
+  color:#fff !important;
+  border-color: var(--gf-red);
+  transform: translateY(-1px);
+}
+
+/* Botones alineados a la derecha de forma limpia */
+.gf-modal .modal-footer .btn + .btn{ margin-left:10px; }
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .gf-modal *{ transition:none !important; }
+}

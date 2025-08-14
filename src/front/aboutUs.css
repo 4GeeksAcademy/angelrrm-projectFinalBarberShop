@@ -1,0 +1,69 @@
+.aboutus-section {
+    background: linear-gradient(180deg, #1c1c1c 0%, #121212 100%);
+    color: #fff;
+    border-radius: 20px;
+    border: 1.5px solid #dfb56533;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+    margin-top: 40px;
+    padding: 40px 30px;
+}
+
+.aboutus-title {
+    color: #dfb565;
+    font-size: 2.4rem;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-left: 4px solid #dfb565;
+    padding-left: 12px;
+}
+
+.aboutus-desc {
+    color: #ddd;
+    line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+.aboutus-subtitle {
+    color: #dfb565;
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+.aboutus-logo {
+    border-radius: 50%;
+    background: #232323;
+    padding: 12px;
+    border: 2px solid #dfb565;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.aboutus-section ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.aboutus-section li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 22px;
+    color: #ccc;
+}
+
+.aboutus-section li::before {
+    content: "★";
+    color: #dfb565;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.1rem;
+}
+
+/* Efecto hover suave */
+.aboutus-section:hover {
+    transform: translateY(-4px);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 10px 40px rgba(223, 181, 101, 0.15);
+}

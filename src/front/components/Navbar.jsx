@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import { Link } from "react-router-dom";
 import logo from '../assets/img/logo.png';
 import { FaShoppingCart } from "react-icons/fa";
+import "../navbar.css"
+import "../modal.css";
 import { getCart } from "../../api/cart";
 
 // Cart context for global state
@@ -165,7 +167,7 @@ export const Navbar = () => {
                                 <FaShoppingCart size={22} />
                                 {cartCount > 0 && (
                                     <span
-                                        className="badge bg-danger position-absolute top-0 start-100 translate-middle"
+                                        className="cart-badge bg-danger position-absolute top-0 start-100 translate-middle"
                                         style={{ fontSize: "0.75rem" }}
                                     >
                                         {cartCount}
@@ -186,7 +188,7 @@ export const Navbar = () => {
                     </ul>
 
                     {/* LOGIN MODAL*/}
-                    <div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade gf-modal" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">
@@ -226,14 +228,14 @@ export const Navbar = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-none cancelar" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-none register" data-bs-toggle="modal" data-bs-target="#registroModal">Registrarse</button>
+                                    <button type="button" className="btn btn-none register" data-bs-toggle="modal" data-bs-target="#registroModal">Registrarse</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* REGISTRE MODAL*/}
-                    <div className="modal fade" id="registroModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div className="modal fade gf-modal" id="registroModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog">
                             <div className="modal-content">
                                 <div className="modal-header">

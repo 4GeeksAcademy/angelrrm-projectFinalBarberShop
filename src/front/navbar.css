@@ -1,0 +1,74 @@
+/* --- NAVBAR GODFATHER --- */
+.navbar {
+  background: linear-gradient(180deg, #1a1a1a, #0e0e0e) !important;
+  border-bottom: 1px solid rgba(223, 181, 101, 0.25);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  margin: 0;
+}
+
+/* Links del navbar */
+.navbar-nav {
+  flex-direction: row !important;
+  gap: 15px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.nav-link {
+  color: #dfb565 !important; /* Dorado */
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #fff3d4 !important; /* Dorado claro */
+  text-shadow: 0 0 6px rgba(223, 181, 101, 0.7);
+}
+
+/* --- CARRITO EN NAVBAR --- */
+.nav-item.position-relative .nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #dfb565 !important; /* Icono dorado */
+}
+
+.nav-item.position-relative .nav-link:hover {
+  color: #fff3d4 !important;
+}
+
+/* Badge del carrito */
+.cart-badge {
+  background: #8b0000 !important; /* Rojo borgoña */
+  color: #fff !important;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    background: #232323;
+    border-radius: 12px;
+    padding: 12px 0;
+    margin-top: 8px;
+    width: 100%;
+  }
+  .navbar .login {
+    display: block !important;
+    margin-left: 12px;
+    margin-top: 6px;
+    background: #232323;
+    border-radius: 8px;
+    padding: 6px 16px;
+    color: #dfb565 !important;
+    font-weight: 700;
+    font-size: 1.09rem;
+    box-shadow: 0 2px 8px #1114;
+  }
+}

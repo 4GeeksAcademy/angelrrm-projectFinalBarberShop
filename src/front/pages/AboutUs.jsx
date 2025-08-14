@@ -1,6 +1,6 @@
 import React from "react";
 import onlylogo from '../assets/img/onlylogo.png';
-
+import '../aboutUs.css'; // Import styles for the About Us page
 
 
 const AboutUs = () => (

@@ -1,0 +1,70 @@
+.contacto-section-wrapper {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background: linear-gradient(145deg, #1b1b1b 0%, #111 100%);
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.contacto-section {
+    border-radius: 20px;
+    background: linear-gradient(180deg, #1c1c1c 0%, #121212 100%);
+    border: 1.5px solid #dfb56533;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+    color: #fff;
+    padding: 40px;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+.contacto-section h2 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: #dfb565;
+    text-align: center;
+    margin-bottom: 36px;
+    letter-spacing: 1px;
+    border-left: 4px solid #dfb565;
+    padding-left: 12px;
+}
+
+.contacto-section h5 {
+    color: #dfb565;
+    font-weight: 600;
+    margin-top: 18px;
+}
+
+.contacto-section a {
+    color: #fff;
+    transition: color 0.3s;
+}
+.contacto-section a:hover {
+    color: #dfb565;
+    text-decoration: underline;
+}
+
+.contacto-section .bi {
+    transition: transform 0.2s, color 0.3s;
+    color: #dfb565;
+    font-size: 1.5rem;
+}
+.contacto-section .bi:hover {
+    transform: scale(1.15) rotate(-6deg);
+    color: #fff;
+}
+
+.contacto-section iframe {
+    border: 2px solid #dfb565;
+    box-shadow: 0 2px 16px #0006;
+    border-radius: 16px;
+}
+
+@media (max-width: 768px) {
+    .contacto-section {
+        padding: 24px 16px;
+    }
+}

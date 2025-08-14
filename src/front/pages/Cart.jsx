@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { getCart } from "../../api/cart";
 import { CartContext } from "../components/Navbar";
+import "../cart.css";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -16,14 +17,22 @@ const Cart = () => {
                 .then(items => {
                     setCartItems(items);
                     setLoading(false);
+
+                    // actualizar contador
+                    const totalQty = Array.isArray(items)
+                        ? items.reduce((acc, it) => acc + (it.quantity || 0), 0)
+                        : 0;
+                    if (updateCartCount) updateCartCount(totalQty);
                 })
                 .catch(() => {
                     setCartItems([]);
                     setLoading(false);
+                    if (updateCartCount) updateCartCount(0);
                 });
         } else {
             setCartItems([]);
             setLoading(false);
+            if (updateCartCount) updateCartCount(0);
         }
     };
 
@@ -39,7 +48,6 @@ const Cart = () => {
                 headers: { "Authorization": `Bearer ${token}` }
             });
             fetchCart();
-            if (updateCartCount) updateCartCount();
         } catch (e) {
             alert("Error al eliminar el producto del carrito");
         }
@@ -57,7 +65,6 @@ const Cart = () => {
                 body: JSON.stringify({ quantity: newQuantity })
             });
             fetchCart();
-            if (updateCartCount) updateCartCount();
         } catch (e) {
             alert("Error al actualizar la cantidad");
         }
@@ -83,7 +90,7 @@ const Cart = () => {
             if (response.ok) {
                 alert(`¡Compra realizada con éxito! Total: €${data.total.toFixed(2)}`);
                 setCartItems([]);
-                if (updateCartCount) updateCartCount();
+                if (updateCartCount) updateCartCount(0);
             } else {
                 alert("Error: " + data.error);
             }
@@ -99,10 +106,11 @@ const Cart = () => {
     );
 
     return (
-        <div className="container py-5">
-            <h2 className="mb-4">Mi Carrito</h2>
+        <div className="container py-5 gf-cart">
+            <h2 className="mb-4 page-title">Mi Carrito</h2>
+
             {loading ? (
-                <p>Cargando...</p>
+                <p className="loading">Cargando...</p>
             ) : cartItems.length === 0 ? (
                 <div className="alert alert-warning text-center">
                     Tu carrito está vacío.
@@ -111,36 +119,50 @@ const Cart = () => {
                 <>
                     <ul className="list-group mb-4">
                         {cartItems.map(item => (
-                            <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
+                            <li
+                                key={item.id}
+                                className="list-group-item d-flex justify-content-between align-items-center"
+                            >
                                 <div className="d-flex align-items-center">
                                     {item.product?.image_url && (
                                         <img
                                             src={item.product.image_url}
                                             alt={item.product.name}
-                                            style={{ width: "60px", height: "60px", objectFit: "cover", marginRight: "15px", borderRadius: "8px" }}
+                                            className="item-thumb"
                                         />
                                     )}
                                     <div>
-                                        <strong>{item.product?.name || "Producto"}</strong>
+                                        <strong className="item-name">
+                                            {item.product?.name || "Producto"}
+                                        </strong>
                                         <br />
-
+                                        {typeof item.product?.price === "number" && (
+                                            <span className="item-price">
+                                                €{item.product.price.toFixed(2)}
+                                            </span>
+                                        )}
                                     </div>
                                 </div>
+
                                 <div className="d-flex align-items-center">
                                     <button
-                                        className="btn btn-outline-secondary btn-sm"
-                                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                                        className="qty-btn"
+                                        onClick={() => updateQuantity(item.id, item.quantity - 1, )}
                                         disabled={item.quantity <= 1}
-                                        style={{ marginRight: "5px" }}
-                                    >-</button>
-                                    <span style={{ minWidth: "30px", textAlign: "center" }}>{item.quantity}</span>
+                                    >
+                                        –
+                                    </button>
+                                    <span className="qty-value mx-2">
+                                        {item.quantity}
+                                    </span>
                                     <button
-                                        className="btn btn-outline-secondary btn-sm"
+                                        className="qty-btn"
                                         onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                        style={{ marginLeft: "5px" }}
-                                    >+</button>
+                                    >
+                                        +
+                                    </button>
                                     <button
-                                        className="btn btn-danger btn-sm ms-3"
+                                        className="btn btn-remove btn-sm ms-3"
                                         onClick={() => handleRemove(item.id)}
                                     >
                                         Eliminar
@@ -152,10 +174,13 @@ const Cart = () => {
 
                     <div className="card">
                         <div className="card-body">
-                            <h4 className="text-end">Total: €{total.toFixed(2)}</h4>
+                            <h4 className="text-end">
+                                <span className="total-label me-2">Total:</span>
+                                <span className="total-value">€{total.toFixed(2)}</span>
+                            </h4>
                             <div className="text-end">
                                 <button
-                                    className="btn btn-success btn-lg"
+                                    className="btn btn-checkout btn-lg"
                                     onClick={handleCheckout}
                                     disabled={checkingOut}
                                 >

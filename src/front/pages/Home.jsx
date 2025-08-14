@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react"
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import onlylogo from '../assets/img/onlylogo.png';
 import CenterModeCarousel from "../components/CarruselCenterMode.jsx";
-
+import "../services.css";
+import '../contact.css';
+import bannerImage from '../assets/img/banner.jpg'; // Import the banner image
 
 export const Home = () => {
 
@@ -40,7 +42,7 @@ export const Home = () => {
 	return (
 		<div className="container-fluid p-0 m-0">
 			{/* BANNER*/}
-			<header className="hero-banner">
+			<header className="hero-banner" style={{backgroundImage: `url(${bannerImage})`}} >
 				<div className="hero-overlay">
 					<h1 className="display-4">Bienvenido a Godfather Barbería</h1>
 					<p className="lead">Look premium, actitud Godfather.</p>
