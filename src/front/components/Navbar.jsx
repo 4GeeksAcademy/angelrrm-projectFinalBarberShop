@@ -48,10 +48,21 @@ export const CartProvider = ({ children }) => {
 
 export const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [userName, setUserName] = useState(null);
 
     // ✅ Previene el error si el provider no está presente
     const cartContext = useContext(CartContext) || {};
     const cartCount = cartContext.cartCount || 0;
+
+    // Al montar, cargar nombre (si existe) y escuchar cambios (login/logout en otras pestañas)
+    useEffect(() => {
+        const storedName = sessionStorage.getItem("name");
+        if (storedName) setUserName(storedName);
+
+        const onStorage = () => setUserName(sessionStorage.getItem("name"));
+        window.addEventListener("storage", onStorage);
+        return () => window.removeEventListener("storage", onStorage);
+    }, []);
 
     const handleToggle = () => setMenuOpen(prev => !prev);
 
@@ -94,22 +105,33 @@ export const Navbar = () => {
         e.preventDefault();
         const response = await fetch(import.meta.env.VITE_BACKEND_URL + "/api/login", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(loginData)
         });
         const data = await response.json();
         if (response.ok) {
-            // Guarda el token en sessionStorage/localStorage, como prefieras
             sessionStorage.setItem("token", data.token);
+            sessionStorage.setItem("name", data.name);      // 👈 guardar nombre
+            setUserName(data.name);                         // 👈 actualizar estado
             alert("Bienvenido " + data.name);
             setLoginData({ email: "", password: "" });
             document.querySelector("#loginModal .btn-close").click();
-            // Aquí puedes redirigir o actualizar estado global, si quieres
+
+            // Opcional útil: notificar para que otros componentes se actualicen (carrito, etc.)
+            window.dispatchEvent(new Event("storage"));
+            window.dispatchEvent(new Event("cartUpdated"));
         } else {
             alert("Error al iniciar sesión: " + (data.error || data.msg));
         }
+    };
+
+    const handleLogout = () => {
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("name");
+        setUserName(null);
+        // Notificar a quienes dependan del auth/cart
+        window.dispatchEvent(new Event("storage"));
+        window.dispatchEvent(new Event("cartUpdated"));
     };
 
     return (
@@ -175,16 +197,34 @@ export const Navbar = () => {
                                 )}
                             </Link>
                         </li>
-                        <li className="nav-item">
-                            <button
-                                type="button"
-                                className="btn btn-outline-light login"
-                                data-bs-toggle="modal"
-                                data-bs-target="#loginModal"
-                            >
-                                Login
-                            </button>
-                        </li>
+
+                        {userName ? (
+                            <>
+                                <li className="nav-item d-flex align-items-center px-2 text-light">
+                                    Hola, <span className="fw-semibold ms-1">{userName}</span>
+                                </li>
+                                <li className="nav-item">
+                                    <button
+                                        type="button"
+                                        className="btn btn-outline-light"
+                                        onClick={handleLogout}
+                                    >
+                                        Logout
+                                    </button>
+                                </li>
+                            </>
+                        ) : (
+                            <li className="nav-item">
+                                <button
+                                    type="button"
+                                    className="btn btn-outline-light login"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#loginModal"
+                                >
+                                    Login
+                                </button>
+                            </li>
+                        )}
                     </ul>
 
                     {/* LOGIN MODAL*/}
