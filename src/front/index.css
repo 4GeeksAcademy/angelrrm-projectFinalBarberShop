@@ -55,10 +55,12 @@ a {
   font-weight: 600;
   font-size: 1.1rem;
   transition: color 0.2s;
+  border: none !important;
 }
 
 .login:hover {
-  color: #fff;
+  background: #dfb565 !important;
+  color: #232323 !important;
 }
 
 /* Hero section styles */
@@ -104,8 +106,8 @@ a {
   transition: background 0.2s, color 0.2s;
 }
 .hero-btn:hover {
-  background: #fff3d4;
-  color: #111;
+  background: #fff3d4 !important;
+  color: #111 !important;
 }
 
 /* Modal styles */
@@ -178,8 +180,8 @@ a {
   font-weight: 700;
   font-size: 1.09rem;
   padding: 10px 24px;
-  margin-top: 10px;
-  transition: background 0.2s, color 0.2s;
+  margin: 10px 10px 0 200px;
+  transition: background 0.2s, color 0.2s !important;
 }
 
 .btn-primary:hover,

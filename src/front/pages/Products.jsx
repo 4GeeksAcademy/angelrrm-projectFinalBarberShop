@@ -23,53 +23,7 @@ const Products = () => {
       } catch (error) {
         console.error("Error:", error);
         // Si no hay productos en la API, usar los datos estáticos como fallback
-        setProducts([
-          {
-            id: 1,
-            brand: "Noberu",
-            type: "Pomada",
-            name: "Noberu Pomada",
-            image_url: "https://i.pinimg.com/1200x/eb/d7/ff/ebd7ff4a2cec0713dc6a33603505afed.jpg",
-            description: "Pomada profesional para acabado natural.",
-            price: 19.99
-          },
-          {
-            id: 2,
-            brand: "Reuzel",
-            type: "Cera",
-            name: "Reuzel Cera",
-            image_url: "https://i.pinimg.com/736x/ee/b5/ad/eeb5ad8b6a1a3942331a663a3c877b0b.jpg",
-            description: "Cera de alta fijación y brillo medio.",
-            price: 15.99
-          },
-          {
-            id: 3,
-            brand: "L3vel3",
-            type: "Pomada",
-            name: "L3vel3 Pomada",
-            image_url: "https://i.pinimg.com/736x/ca/69/e9/ca69e9de8c4fd7241c99f28a8e8e3019.jpg",
-            description: "Pomada para peinado flexible y fijación media.",
-            price: 17.99
-          },
-          {
-            id: 4,
-            brand: "Red One",
-            type: "Cera",
-            name: "Red One Cera",
-            image_url: "https://i.pinimg.com/736x/45/19/62/451962402a42f668a7082ef8b7b123f0.jpg",
-            description: "Cera de alta fijación con aroma frutal.",
-            price: 14.99
-          },
-          {
-            id: 5,
-            brand: "Slick gorila",
-            type: "Polvo voluminizador",
-            name: "Slick gorila Polvo voluminizador",
-            image_url: "https://i.pinimg.com/736x/30/1b/32/301b32d3d3d4b6e6af2eaf2e024ec920.jpg",
-            description: "Polvo para volumen y textura instantánea.",
-            price: 12.99
-          }
-        ]);
+
       } finally {
         setLoading(false);
       }
