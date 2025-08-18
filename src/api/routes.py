@@ -15,7 +15,7 @@ api = Blueprint('api', __name__)
 
 CORS(api)
 # Allow CORS requests to this API
-stripe.api_key =  os.getenv("STRIPE_SECRET_KEY")
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 @api.route('/hello', methods=['GET'])
 def handle_hello():
