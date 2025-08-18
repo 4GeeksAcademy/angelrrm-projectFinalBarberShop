@@ -8,14 +8,14 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
-import stripe
+import stripe, os
 
 
 api = Blueprint('api', __name__)
 
 CORS(api)
 # Allow CORS requests to this API
-stripe.api_key = "sk_test_51Rvw871sOpqwknuqx7iXaITx49DYktXjtGzqFhpEbzqr5H8r8YeNJV6gXRJuvcJ8iYOclMCOExNoOHFDUQaxcOwZ00tqNexHoQ"
+stripe.api_key =  os.getenv("STRIPE_SECRET_KEY")
 
 @api.route('/hello', methods=['GET'])
 def handle_hello():
