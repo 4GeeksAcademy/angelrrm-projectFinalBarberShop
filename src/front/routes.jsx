@@ -12,6 +12,7 @@ import { Demo } from "./pages/Demo";
 import Products from "./pages/Products.jsx"; // Import the Products component
 import AboutUs from "./pages/AboutUs.jsx"; // Import the AboutUs component
 import Cart from "./pages/Cart.jsx"; // Import the Cart component
+import { PaymentPage } from "./pages/PaymentPage.jsx"; // Import the PaymentPage component
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -29,6 +30,7 @@ export const router = createBrowserRouter(
         <Route path="/products" element={<Products />} />
         <Route path="/sobre-nosotros" element={<AboutUs />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/payment/:totalAmount/:currency" element={<PaymentPage />} /> {/* Dynamic route for payment page */}
         <Route path="/single/:theId" element={ <Single />} />  {/* Dynamic route for single items */}
         <Route path="/demo" element={<Demo />} />
       </Route>

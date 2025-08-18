@@ -8,13 +8,14 @@ from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
-
+import stripe
 
 
 api = Blueprint('api', __name__)
 
 CORS(api)
 # Allow CORS requests to this API
+stripe.api_key = "sk_test_51Rvw871sOpqwknuqx7iXaITx49DYktXjtGzqFhpEbzqr5H8r8YeNJV6gXRJuvcJ8iYOclMCOExNoOHFDUQaxcOwZ00tqNexHoQ"
 
 @api.route('/hello', methods=['GET'])
 def handle_hello():
@@ -612,3 +613,18 @@ def debug_user_cart(user_id):
     }
 
     return jsonify(debug_info), 200
+
+@api.route('/create-payment', methods=["POST"])
+def create_payment():
+    response_body = {}
+    try:
+        data = request.json
+        intent = stripe.PaymentIntent.create(
+            amount=data["amount"], currency=data["currency"], automatic_payment_methods={'enabled': True})
+
+        response_body["client_secret"] = intent["client_secret"]
+        return response_body, 200
+    except Exception as e:
+        response_body["success"] = False
+        response_body["error"] = str(e)
+        return response_body, 403

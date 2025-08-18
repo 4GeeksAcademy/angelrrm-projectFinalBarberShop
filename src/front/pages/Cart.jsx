@@ -2,13 +2,14 @@ import React, { useEffect, useState, useContext } from "react";
 import { getCart } from "../../api/cart";
 import { CartContext } from "../components/Navbar";
 import "../cart.css";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [checkingOut, setCheckingOut] = useState(false);
-
     const { updateCartCount } = useContext(CartContext) || {};
+    const navigate = useNavigate();
 
     const fetchCart = () => {
         const token = sessionStorage.getItem("token");
@@ -76,29 +77,8 @@ const Cart = () => {
             alert("Debes iniciar sesión para realizar la compra");
             return;
         }
-
-        setCheckingOut(true);
-
-        try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/cart/checkout`, {
-                method: "POST",
-                headers: { "Authorization": `Bearer ${token}` }
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                alert(`¡Compra realizada con éxito! Total: €${data.total.toFixed(2)}`);
-                setCartItems([]);
-                if (updateCartCount) updateCartCount(0);
-            } else {
-                alert("Error: " + data.error);
-            }
-        } catch (error) {
-            alert("Error al procesar la compra");
-        } finally {
-            setCheckingOut(false);
-        }
+        const currency = "EUR";
+        navigate(`/payment/${total.toFixed(2)}/${currency}`);
     };
 
     const total = cartItems.reduce((acc, item) =>
