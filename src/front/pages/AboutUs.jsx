@@ -17,7 +17,7 @@ const AboutUs = () => (
       <div className="col-md-8">
         <h1 className="aboutus-title mb-3">Sobre Nosotros</h1>
         <p className="aboutus-desc fs-5">
-          <b>Barbería Godfather</b> es una empresa fundada y dirigida por venezolanos, con más de <b>10 años de experiencia en España</b> en el arte de la barbería.
+          <b>Barbería Godfather</b>, con más de <b>10 años de experiencia en España</b> en el arte de la barbería.
           <br /><br />
           Nuestro equipo combina pasión, dedicación y técnica, trayendo lo mejor de las tradiciones venezolanas y el estilo contemporáneo europeo. Cada cliente que cruza nuestra puerta es recibido como familia, disfrutando de un ambiente exclusivo y profesional, donde la calidad, la higiene y la excelencia son nuestra promesa.
         </p>

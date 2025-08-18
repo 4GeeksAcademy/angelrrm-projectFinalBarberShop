@@ -3,6 +3,7 @@ import { getCart } from "../../api/cart";
 import { CartContext } from "../components/Navbar";
 import "../cart.css";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
@@ -84,7 +85,7 @@ const Cart = () => {
     const total = cartItems.reduce((acc, item) =>
         acc + (item.product?.price || 0) * item.quantity, 0
     );
-
+    const location = useLocation();
     return (
         <div className="container py-5 gf-cart">
             <h2 className="mb-4 page-title">Mi Carrito</h2>
@@ -127,7 +128,7 @@ const Cart = () => {
                                 <div className="d-flex align-items-center">
                                     <button
                                         className="qty-btn"
-                                        onClick={() => updateQuantity(item.id, item.quantity - 1, )}
+                                        onClick={() => updateQuantity(item.id, item.quantity - 1,)}
                                         disabled={item.quantity <= 1}
                                     >
                                         –
@@ -172,6 +173,7 @@ const Cart = () => {
                 </>
             )}
         </div>
+        
     );
 };
 

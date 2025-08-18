@@ -263,7 +263,7 @@ export const Navbar = () => {
                                             <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                                             <label className="form-check-label" htmlFor="exampleCheck1">Recuerdame</label>
                                         </div>
-                                        <button type="submit" className="btn btn-none submit">Submit</button>
+                                        <button type="submit" className="btn btn-none submit">Enviar</button>
                                     </form>
                                 </div>
                                 <div className="modal-footer">
