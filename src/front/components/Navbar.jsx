@@ -134,209 +134,264 @@ export const Navbar = () => {
         window.dispatchEvent(new Event("cartUpdated"));
     };
 
-    return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container">
-                <Link className="navbar-brand" to="/">
-                    <img
-                        src={logo}
-                        alt="Logo Godfather Barbería"
-                        style={{
-                            width: "200px",
-                            height: "auto",
-                            margin: 0,
-                            padding: 0,
-                            display: "block"
-                        }}
-                    />
-                </Link>
+return (
+  <>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
+        {/* Logo */}
+        <Link className="navbar-brand" to="/">
+          <img
+            src={logo}
+            alt="Logo Godfather Barbería"
+            style={{
+              width: "200px",
+              height: "auto",
+              margin: 0,
+              padding: 0,
+              display: "block",
+            }}
+          />
+        </Link>
 
-                {/* Botón hamburguesa */}
-                <button
-                    className="navbar-toggler"
+        {/* === Carrito + Login + Hamburguesa SOLO en móvil === */}
+        <div className="d-flex d-lg-none ms-auto align-items-center gap-2">
+          {/* Carrito móvil */}
+          <Link
+            className="btn p-0 position-relative cart-icon-btn"
+            to="/cart"
+            title="Ver carrito"
+            aria-label="Carrito"
+            onClick={() => setMenuOpen(false)}
+          >
+            <FaShoppingCart size={22} />
+            {cartCount > 0 && (
+              <span className="cart-badge bg-danger position-absolute top-0 start-100 translate-middle">
+                {cartCount}
+              </span>
+            )}
+          </Link>
+
+          {/* Login móvil */}
+          {userName ? (
+            <button
+              type="button"
+              className="btn btn-outline-light btn-sm"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="btn login-mobile"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+              onClick={() => setMenuOpen(false)}   // 👈 cerramos el overlay antes de abrir modal
+            >
+              Login
+            </button>
+          )}
+
+          {/* Hamburguesa */}
+          <button
+            className="navbar-toggler"
+            type="button"
+            onClick={handleToggle}
+            aria-controls="navbarGodfather"
+            aria-expanded={menuOpen}
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        </div>
+
+        {/* Menú de navegación (collapse como overlay) */}
+        <div
+          className={`collapse navbar-collapse${menuOpen ? " show" : ""}`}
+          id="navbarGodfather"
+        >
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0" style={{ gap: "15px" }}>
+            <li className="nav-item">
+              <a
+                className="nav-link"
+                href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMenuOpen(false)}
+              >
+                Reserva tu Cita
+              </a>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/products" onClick={() => setMenuOpen(false)}>
+                Productos
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/#contacto" onClick={() => setMenuOpen(false)}>
+                Contacto
+              </a>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/sobre-nosotros" onClick={() => setMenuOpen(false)}>
+                Sobre Nosotros
+              </Link>
+            </li>
+          </ul>
+
+          {/* Carrito + login SOLO en desktop */}
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 d-none d-lg-flex align-items-center gap-2">
+            <li className="nav-item position-relative">
+              <Link className="nav-link" to="/cart" title="Ver carrito">
+                <FaShoppingCart size={22} />
+                {cartCount > 0 && (
+                  <span className="cart-badge bg-danger position-absolute top-0 start-100 translate-middle">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </li>
+
+            {userName ? (
+              <>
+                <li className="nav-item d-flex align-items-center px-2 text-light">
+                  Hola, <span className="fw-semibold ms-1">{userName}</span>
+                </li>
+                <li className="nav-item">
+                  <button
                     type="button"
-                    onClick={handleToggle}
-                    aria-controls="navbarGodfather"
-                    aria-expanded={menuOpen}
-                    aria-label="Toggle navigation"
+                    className="btn btn-outline-light"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <li className="nav-item">
+                <button
+                  type="button"
+                  className="btn bg-none login"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
                 >
-                    <span className="navbar-toggler-icon"></span>
+                  Login
                 </button>
+              </li>
+            )}
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-                {/* Menú de navegación */}
-                <div className={`collapse navbar-collapse${menuOpen ? " show" : ""}`} id="navbarGodfather">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0" style={{ gap: "15px" }}>
-                        <li className="nav-item">
-                            <a className="nav-link" href="https://booksy.com/es-es/40504_barberia-godfather_barberia_53009_madrid#ba_s=seo" target="_blank" rel="noopener noreferrer">
-                                Reserva tu Cita
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/products">Productos</Link>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/#contacto">Contacto</a>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="/sobre-nosotros">Sobre Nosotros</Link>
-                        </li>
-                    </ul>
+    {/* ⬇️⬇️ IMPORTANTE: Modales FUERA del navbar/collapse */}
+    {/* LOGIN MODAL */}
+    <div className="modal fade gf-modal" id="loginModal" tabIndex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h1 className="modal-title fs-5" id="loginLabel">Login</h1>
+            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div className="modal-body">
+            <form onSubmit={handleLogin}>
+              <div className="mb-3 email">
+                <label htmlFor="loginEmail" className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="loginEmail"
+                  aria-describedby="emailHelp"
+                  value={loginData.email}
+                  onChange={e => setLoginData({ ...loginData, email: e.target.value })}
+                />
+                <div id="emailHelp" className="form-text">Nunca compartiremos tu correo electrónico con nadie más.</div>
+              </div>
+              <div className="mb-3 password">
+                <label htmlFor="loginPassword" className="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="loginPassword"
+                  value={loginData.password}
+                  onChange={e => setLoginData({ ...loginData, password: e.target.value })}
+                />
+              </div>
+              <div className="mb-3 form-check">
+                <input type="checkbox" className="form-check-input" id="rememberMe" />
+                <label className="form-check-label" htmlFor="rememberMe">Recuérdame</label>
+              </div>
+              <button type="submit" className="btn btn-none submit">Enviar</button>
+            </form>
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-none cancelar" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" className="btn btn-none register" data-bs-toggle="modal" data-bs-target="#registroModal">Registrarse</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                    {/* Login & Cart */}
-                    <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li className="nav-item position-relative">
-                            <Link className="nav-link" to="/cart" title="Ver carrito">
-                                <FaShoppingCart size={22} />
-                                {cartCount > 0 && (
-                                    <span
-                                        className="cart-badge bg-danger position-absolute top-0 start-100 translate-middle"
-                                        style={{ fontSize: "0.75rem" }}
-                                    >
-                                        {cartCount}
-                                    </span>
-                                )}
-                            </Link>
-                        </li>
-
-                        {userName ? (
-                            <>
-                                <li className="nav-item d-flex align-items-center px-2 text-light">
-                                    Hola, <span className="fw-semibold ms-1">{userName}</span>
-                                </li>
-                                <li className="nav-item">
-                                    <button
-                                        type="button"
-                                        className="btn btn-outline-light"
-                                        onClick={handleLogout}
-                                    >
-                                        Logout
-                                    </button>
-                                </li>
-                            </>
-                        ) : (
-                            <li className="nav-item">
-                                <button
-                                    type="button"
-                                    className="btn btn-outline-light login"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#loginModal"
-                                >
-                                    Login
-                                </button>
-                            </li>
-                        )}
-                    </ul>
-
-                    {/* LOGIN MODAL*/}
-                    <div className="modal fade gf-modal" id="loginModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-dialog">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Login</h1>
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div className="modal-body">
-                                    <form onSubmit={handleLogin}>
-                                        <div className="mb-3 email">
-                                            <label htmlFor="exampleInputEmail1" className="form-label">Email</label>
-                                            <input
-                                                type="email"
-                                                className="form-control"
-                                                id="exampleInputEmail1"
-                                                aria-describedby="emailHelp"
-                                                value={loginData.email}
-                                                onChange={e => setLoginData({ ...loginData, email: e.target.value })}
-                                            />
-                                            <div id="emailHelp" className="form-text">Nunca compartiremos tu correo electrónico con nadie más.</div>
-                                        </div>
-                                        <div className="mb-3 password">
-                                            <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                id="exampleInputPassword1"
-                                                value={loginData.password}
-                                                onChange={e => setLoginData({ ...loginData, password: e.target.value })}
-                                            />
-                                        </div>
-                                        <div className="mb-3 form-check">
-                                            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                                            <label className="form-check-label" htmlFor="exampleCheck1">Recuerdame</label>
-                                        </div>
-                                        <button type="submit" className="btn btn-none submit">Enviar</button>
-                                    </form>
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-none cancelar" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" className="btn btn-none register" data-bs-toggle="modal" data-bs-target="#registroModal">Registrarse</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* REGISTRE MODAL*/}
-                    <div className="modal fade gf-modal" id="registroModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div className="modal-dialog">
-                            <div className="modal-content">
-                                <div className="modal-header">
-                                    <h1 className="modal-title fs-5" id="exampleModalLabel">Registro</h1>
-                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div className="modal-body">
-                                    <form className="row g-3" onSubmit={(e) => { handleregister(e) }}>
-                                        <div className="col-md-12">
-                                            <label htmlFor="firstName" className="form-label">Nombre</label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                id="firstName"
-                                                name="name"
-                                                required
-                                                onChange={(e) => setInforegistro({ ...inforegistro, name: e.target.value })}
-                                            />
-                                        </div>
-
-                                        <div className="col-md-12">
-                                            <label htmlFor="email" className="form-label">Email</label>
-                                            <input
-                                                type="email"
-                                                className="form-control"
-                                                id="email"
-                                                name="email"
-                                                required
-                                                onChange={(e) => setInforegistro({ ...inforegistro, email: e.target.value })}
-                                            />
-                                        </div>
-                                        <div className="col-md-12">
-                                            <label htmlFor="password" className="form-label">Contraseña</label>
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                id="password"
-                                                required
-                                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
-                                                title="Debe tener mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número"
-                                                name="password"
-                                                onChange={(e) => setInforegistro({ ...inforegistro, password: e.target.value })}
-                                            />
-                                            <div className="form-text">
-                                                Debe tener mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número.
-                                            </div>
-                                        </div>
-                                        <div className="col-12">
-                                            <button className="btn btn-none w-100 register" type="submit">Registrarse</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="modal-footer">
-                                    <button type="button" className="btn btn-none cancelar" data-bs-dismiss="modal">Cancelar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+    {/* REGISTRO MODAL */}
+    <div className="modal fade gf-modal" id="registroModal" tabIndex="-1" aria-labelledby="registroLabel" aria-hidden="true">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h1 className="modal-title fs-5" id="registroLabel">Registro</h1>
+            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div className="modal-body">
+            <form className="row g-3" onSubmit={handleregister}>
+              <div className="col-md-12">
+                <label htmlFor="firstName" className="form-label">Nombre</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="firstName"
+                  name="name"
+                  required
+                  onChange={(e) => setInforegistro({ ...inforegistro, name: e.target.value })}
+                />
+              </div>
+              <div className="col-md-12">
+                <label htmlFor="email" className="form-label">Email</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  required
+                  onChange={(e) => setInforegistro({ ...inforegistro, email: e.target.value })}
+                />
+              </div>
+              <div className="col-md-12">
+                <label htmlFor="password" className="form-label">Contraseña</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  required
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
+                  title="Debe tener mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número"
+                  name="password"
+                  onChange={(e) => setInforegistro({ ...inforegistro, password: e.target.value })}
+                />
+                <div className="form-text">
+                  Debe tener mínimo 8 caracteres, al menos una mayúscula, una minúscula y un número.
                 </div>
-            </div>
-        </nav>
-    );
+              </div>
+              <div className="col-12">
+                <button className="btn btn-none w-100 register" type="submit">Registrarse</button>
+              </div>
+            </form>
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-none cancelar" data-bs-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </>
+);
+
 };

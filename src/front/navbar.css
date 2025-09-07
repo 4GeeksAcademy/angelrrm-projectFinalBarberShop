@@ -6,7 +6,11 @@
   padding-top: 10px !important;
   padding-bottom: 10px !important;
   margin: 0;
+  overflow: visible;
+  position: relative; 
+  z-index: 1030;
 }
+#navbarGodfather { z-index: 1040; }
 
 /* Links del navbar */
 .navbar-nav {
@@ -40,30 +44,103 @@
 .nav-item.position-relative .nav-link:hover {
   color: #fff3d4 !important;
 }
+.login {
+  display: flex !important;
+  margin-left: 12px;
+  background: #232323;
+  border-radius: 8px;
+  padding: 6px 16px;
+  color: #dfb565 !important;
+  font-weight: 700;
+  font-size: 1.09rem;
+  box-shadow: 0 2px 8px #1114;
+}
 
-/* Badge del carrito */
-.cart-badge {
-  background: #8b0000 !important; /* Rojo borgoña */
+.login:hover {
+  background: #2c2c2c;
+  color: #fff3d4 !important;
+  text-shadow: 0 0 6px rgba(223, 181, 101, 0.7);
+}
+/* === Carrito móvil junto al hamburguesa === */
+.cart-icon-btn {
+  color: #dfb565 !important;      /* Dorado */
+  margin-right: 10px;             /* separarlo un poco del hamburguesa */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-icon-btn:hover {
+  color: #fff3d4 !important;      /* Dorado claro al hover */
+  text-shadow: 0 0 6px rgba(223, 181, 101, 0.7);
+}
+
+/* Ajuste del badge dentro del carrito */
+.cart-icon-btn .cart-badge {
+  background: #8b0000 !important; /* rojo borgoña */
   color: #fff !important;
   font-size: 0.75rem;
   padding: 2px 6px;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
 }
 
+.login-mobile {
+  background: #232323;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #dfb565 !important;   /* dorado */
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+.login-mobile:hover {
+  color: #fff3d4 !important;
+  text-shadow: 0 0 6px rgba(223, 181, 101, 0.7);
+}
 @media (max-width: 991px) {
-  .navbar-nav {
-    background: #232323;
-    border-radius: 12px;
-    padding: 12px 0;
-    margin-top: 8px;
-    width: 100%;
+  /* Panel colapsable como overlay, pegado al navbar, sin empujar el contenido */
+  #navbarGodfather.collapse {
+    position: absolute;
+    top: 100%;          /* justo debajo del navbar */
+    right: 0;
+    width: min(85vw, 380px);
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+    padding: 16px 24px;
+    background: linear-gradient(180deg, #1a1a1a, #0e0e0e);
+    border: 1px solid rgba(223, 181, 101, 0.25);
+    border-top: none;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
+    display: none;      /* por defecto oculto (Bootstrap/tu estado añaden .show) */
   }
-  .navbar .login {
-    display: block !important;
-    margin-left: 12px;
-    margin-top: 6px;
-    background: #232323;
+
+  /* Cuando tu estado agrega .show, lo mostramos como bloque (no flex) */
+  #navbarGodfather.show { 
+    display: block; 
+  }
+
+  /* La lista del menú ya no define el ancho ni “empuja” nada */
+  #navbarGodfather .navbar-nav {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px;
+    background: transparent !important;
+    padding: 0;
+    width: 100%;
+    margin: 0 !important;
+    box-shadow: none;
+  }
+
+  .cart-icon-btn {
+  line-height: 1;
+}
+
+  /* Botón login dentro del panel */
+  .login {
+    display: flex !important;
+    margin: 6px 0 0 0;
     border-radius: 8px;
     padding: 6px 16px;
     color: #dfb565 !important;
@@ -72,3 +149,5 @@
     box-shadow: 0 2px 8px #1114;
   }
 }
+
+
